@@ -1,0 +1,238 @@
+/* Legal Pages Styling */
+
+.legal-page {
+  background: var(--black);
+  color: var(--off-white);
+  min-height: 100vh;
+}
+
+.legal-hero {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(10, 10, 10, 0.95) 100%);
+  padding: 8rem 2rem 4rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  text-align: center;
+}
+
+.legal-hero.security-hero {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(10, 10, 10, 0.95) 100%);
+}
+
+.legal-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(135deg, var(--electric-blue), var(--cyber-cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-bg);
+}
+
+.legal-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--electric-blue), var(--cyber-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.legal-subtitle {
+  font-size: 1rem;
+  color: var(--cyber-cyan);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.legal-intro {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.legal-content {
+  padding: 4rem 2rem;
+}
+
+.legal-section {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  padding: 3rem;
+  background: rgba(0, 212, 255, 0.03);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 12px;
+}
+
+.legal-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--electric-blue), var(--cyber-cyan));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-bg);
+  margin-bottom: 1.5rem;
+}
+
+.legal-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--electric-blue);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.legal-section h3 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: var(--cyber-cyan);
+}
+
+.legal-section p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
+}
+
+.legal-section ul, 
+.legal-section ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.legal-section li {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1rem;
+}
+
+.legal-section li strong {
+  color: var(--electric-blue);
+  font-weight: 600;
+}
+
+.legal-note {
+  background: rgba(0, 212, 255, 0.1);
+  border-left: 4px solid var(--electric-blue);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+}
+
+.legal-note strong {
+  color: var(--electric-blue);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.legal-contact {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 255, 0.05));
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.contact-details {
+  background: rgba(0, 212, 255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.contact-details p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.contact-details p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-details strong {
+  color: var(--electric-blue);
+}
+
+/* Security Page Specific Styles */
+
+.security-principles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.principle-card {
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.principle-card h4 {
+  font-size: 1.25rem;
+  color: var(--electric-blue);
+  margin-bottom: 0.75rem;
+}
+
+.principle-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* Responsive Design */
+
+@media (max-width: 1024px) {
+  .legal-hero h1 {
+    font-size: 2.75rem;
+  }
+
+  .security-principles {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .legal-hero {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .legal-hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .legal-intro {
+    font-size: 1.1rem;
+  }
+
+  .legal-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .legal-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .legal-section h3 {
+    font-size: 1.25rem;
+  }
+
+  .legal-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .principle-card {
+    padding: 1.5rem;
+  }
+}

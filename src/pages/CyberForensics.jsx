@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Terminal, Lock, Database, Shield, CheckCircle2, Zap, Search, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import ServiceQuickNav from '../components/ServiceQuickNav'
 import './ServicePages.css'
 
 function CyberForensics() {
@@ -31,6 +32,12 @@ function CyberForensics() {
               When incidents happen, evidence speaks. We investigate, preserve, and prevent recurrence.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="service-nav-shell">
+        <div className="container">
+          <ServiceQuickNav />
         </div>
       </section>
 

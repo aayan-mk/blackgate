@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Shield, Lock, Server, Terminal, CheckCircle2, Zap, Database, Eye } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import ServiceQuickNav from '../components/ServiceQuickNav'
 import './ServicePages.css'
 
 function Cybersecurity() {
@@ -31,6 +32,12 @@ function Cybersecurity() {
               Enterprise-grade security engineering that stops threats before they materialize.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="service-nav-shell">
+        <div className="container">
+          <ServiceQuickNav />
         </div>
       </section>
 

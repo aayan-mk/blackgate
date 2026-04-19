@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Brain, Cpu, Zap, CheckCircle2, Bot, TrendingUp, Target, MessageSquare } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import ServiceQuickNav from '../components/ServiceQuickNav'
 import './ServicePages.css'
 
 function AISolutions() {
@@ -31,6 +32,12 @@ function AISolutions() {
               Intelligence at scale. AI systems that automate complexity and unlock insights.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="service-nav-shell">
+        <div className="container">
+          <ServiceQuickNav />
         </div>
       </section>
 

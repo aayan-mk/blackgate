@@ -16,25 +16,25 @@ function About() {
     {
       name: "Aayan Shaikh",
       role: "Engineering, Web Systems & AI Automation",
-      bio: "Responsible for web architecture, performance optimization, and intelligent automation. Focused on building clean, maintainable systems that scale securely. Believes AI should solve real problems with explainable outcomes—not add complexity for its own sake.",
+      bio: "Responsible for web architecture, performance optimization, and intelligent automation. Focused on building clean, maintainable systems that scale securely.",
       icon: <Code size={32} />
     },
     {
       name: "Avaish Khan",
       role: "Cybersecurity & Risk",
-      bio: "Focused on security-by-design principles, threat awareness, and access control. Ensures every system decision accounts for real-world risks. Approaches engineering with caution and discipline—because one oversight can compromise everything.",
+      bio: "Focused on security-by-design principles, threat awareness, and access control. Ensures every system decision accounts for real-world risks.",
       icon: <Shield size={32} />
     },
     {
       name: "Aniket Gupta",
       role: "Security Architecture & Reliability",
-      bio: "Specializes in preventive security practices, reliability planning, and building systems that fail safely. Champions documentation, clear communication, and long-term thinking. Believes the best security incidents are the ones that never happen.",
+      bio: "Specializes in preventive security practices, reliability planning, and building systems that fail safely. Champions documentation and long-term thinking.",
       icon: <Lock size={32} />
     },
     {
       name: "Vidhaan Ghambire",
       role: "Cyber Forensics & Incident Response",
-      bio: "Leads digital investigations, evidence preservation, and post-incident analysis. Expert in reconstructing attack timelines, malware reverse engineering, and ensuring breaches never repeat. Believes every incident is a learning opportunity—and every log tells a story.",
+      bio: "Leads digital investigations, evidence preservation, and post-incident analysis. Expert in reconstructing attack timelines and ensuring breaches never repeat.",
       icon: <Terminal size={32} />
     }
   ]
@@ -132,9 +132,9 @@ function About() {
             transition={{ duration: 0.6 }}
             className="section-header"
           >
-            <h2>Founding Team</h2>
+            <h2>Meet the Founding Team</h2>
             <p className="section-subtitle">
-              Four experts. One mission: Build systems that never compromise.
+              Four experts. One mission: Build secure, reliable, intelligent systems.
             </p>
           </motion.div>
 

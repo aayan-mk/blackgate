@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import WebDevelopment from './pages/WebDevelopment.jsx'
@@ -12,6 +12,11 @@ import CaseStudies from './pages/CaseStudies.jsx'
 import Privacy from './pages/Privacy.jsx'
 import Terms from './pages/Terms.jsx'
 import SecurityPage from './pages/SecurityPage.jsx'
+import Product from './pages/Product.jsx'
+import Feature from './pages/Feature.jsx'
+import Resources from './pages/Resources.jsx'
+import Login from './pages/Login.jsx'
+import SignUp from './pages/SignUp.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -22,11 +27,19 @@ createRoot(document.getElementById('root')).render(
         <Route path="/services/cybersecurity" element={<Cybersecurity />} />
         <Route path="/services/cyber-forensics" element={<CyberForensics />} />
         <Route path="/services/ai-solutions" element={<AISolutions />} />
+        <Route path="/services" element={<Navigate to="/services/web-development" replace />} />
+        <Route path="/services/*" element={<Navigate to="/services/web-development" replace />} />
         <Route path="/about" element={<About />} />
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/security" element={<SecurityPage />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/features" element={<Feature />} />
+        <Route path="/feature" element={<Feature />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

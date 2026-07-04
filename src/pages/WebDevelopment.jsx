@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Code, CheckCircle2, Zap, Globe, Smartphone, Server, Shield } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import ServiceQuickNav from '../components/ServiceQuickNav'
 import './ServicePages.css'
 
 function WebDevelopment() {
@@ -31,6 +32,12 @@ function WebDevelopment() {
               Modern, secure, and lightning-fast web applications built with precision engineering.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="service-nav-shell">
+        <div className="container">
+          <ServiceQuickNav />
         </div>
       </section>
 

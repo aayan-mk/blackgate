@@ -128,9 +128,9 @@ export default function HeroSection() {
             animate="visible"
             className="relative flex items-center justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[560px] aspect-square opacity-95 lg:opacity-100">
+            <div className="relative w-full max-w-[500px] aspect-square opacity-95 lg:opacity-100">
               <div className="absolute inset-0 rounded-full bg-black/80 blur-3xl" />
-              <RotatingEarth width={680} height={680} className="relative w-full" />
+              <RotatingEarth width={620} height={620} className="relative w-full" />
             </div>
           </motion.div>
         </div>

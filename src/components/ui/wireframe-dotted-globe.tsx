@@ -11,35 +11,48 @@ interface RotatingEarthProps {
 
 export default function RotatingEarth({ width = 800, height = 800, className = "" }: RotatingEarthProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!canvasRef.current) return
+    if (!canvasRef.current || !wrapperRef.current) return
 
     const canvas = canvasRef.current
     const context = canvas.getContext("2d")
     if (!context) return
 
-    const size = Math.min(width, height, window.innerWidth - 40, window.innerHeight - 100)
-    const containerWidth = size
-    const containerHeight = size
-    const radius = size / 2.5
+    let currentSize = 0
+    const projection = d3.geoOrthographic()
 
-    const dpr = window.devicePixelRatio || 1
-    canvas.width = size * dpr
-    canvas.height = size * dpr
-    canvas.style.width = `${size}px`
-    canvas.style.height = `${size}px`
-    context.scale(dpr, dpr)
+    const updateCanvasSize = () => {
+      const wrapper = wrapperRef.current
+      if (!wrapper) return
 
-    const projection = d3
-      .geoOrthographic()
-      .scale(radius)
-      .translate([containerWidth / 2, containerHeight / 2])
-      .clipAngle(90)
+      const wrapperWidth = wrapper.clientWidth
+      const wrapperHeight = wrapper.clientHeight || wrapperWidth
+      const size = Math.max(1, Math.floor(Math.min(width, height, wrapperWidth, wrapperHeight)))
+      const dpr = window.devicePixelRatio || 1
+
+      currentSize = size
+      canvas.width = size * dpr
+      canvas.height = size * dpr
+      canvas.style.width = `${size}px`
+      canvas.style.height = `${size}px`
+      context.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+      const radius = size / 3
+      projection
+        .scale(radius)
+        .translate([size / 2, size / 2])
+        .clipAngle(90)
+
+      render()
+    }
 
     const path = d3.geoPath().projection(projection).context(context)
+    const targetRotation = [0, 0]
+    const currentRotation = [0, 0]
 
     const pointInPolygon = (point: [number, number], polygon: number[][]): boolean => {
       const [x, y] = point
@@ -134,13 +147,16 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     let landFeatures: any
 
     const render = () => {
-      context.clearRect(0, 0, containerWidth, containerHeight)
+      if (!currentSize) return
+
+      context.clearRect(0, 0, currentSize, currentSize)
 
       const currentScale = projection.scale()
+      const radius = currentSize / 3
       const scaleFactor = currentScale / radius
 
       context.beginPath()
-      context.arc(size / 2, size / 2, currentScale, 0, 2 * Math.PI)
+      context.arc(currentSize / 2, currentSize / 2, currentScale, 0, 2 * Math.PI)
       context.strokeStyle = "#ffffff"
       context.lineWidth = 2 * scaleFactor
       context.stroke()
@@ -169,9 +185,9 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
           if (
             projected &&
             projected[0] >= 0 &&
-            projected[0] <= size &&
+            projected[0] <= currentSize &&
             projected[1] >= 0 &&
-            projected[1] <= size
+            projected[1] <= currentSize
           ) {
             context.beginPath()
             context.arc(projected[0], projected[1], 1.2 * scaleFactor, 0, 2 * Math.PI)
@@ -213,16 +229,19 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
       }
     }
 
-    const rotation = [0, 0]
     let autoRotate = true
     const rotationSpeed = 0.5
+    let hoverAmount = 0
 
     const rotate = () => {
       if (autoRotate) {
-        rotation[0] += rotationSpeed
-        projection.rotate(rotation)
-        render()
+        targetRotation[0] += rotationSpeed
       }
+
+      currentRotation[0] += (targetRotation[0] - currentRotation[0]) * 0.08
+      currentRotation[1] += (targetRotation[1] - currentRotation[1]) * 0.08
+      projection.rotate(currentRotation)
+      render()
     }
 
     const rotationTimer = d3.timer(rotate)
@@ -231,19 +250,18 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
       autoRotate = false
       const startX = event.clientX
       const startY = event.clientY
-      const startRotation = [...rotation]
+      const startRotation = [...targetRotation]
 
       const handleMouseMove = (moveEvent: MouseEvent) => {
         const sensitivity = 0.5
         const dx = moveEvent.clientX - startX
         const dy = moveEvent.clientY - startY
 
-        rotation[0] = startRotation[0] + dx * sensitivity
-        rotation[1] = startRotation[1] - dy * sensitivity
-        rotation[1] = Math.max(-90, Math.min(90, rotation[1]))
+        targetRotation[0] = startRotation[0] + dx * sensitivity
+        targetRotation[1] = startRotation[1] - dy * sensitivity
+        targetRotation[1] = Math.max(-90, Math.min(90, targetRotation[1]))
 
-        projection.rotate(rotation)
-        render()
+        autoRotate = false
       }
 
       const handleMouseUp = () => {
@@ -259,6 +277,29 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
       document.addEventListener("mouseup", handleMouseUp)
     }
 
+    const handlePointerMove = (event: PointerEvent) => {
+      const wrapper = wrapperRef.current
+      if (!wrapper) return
+
+      const bounds = wrapper.getBoundingClientRect()
+      const x = (event.clientX - bounds.left) / bounds.width
+      const y = (event.clientY - bounds.top) / bounds.height
+
+      const isInside = x >= 0 && x <= 1 && y >= 0 && y <= 1
+      if (!isInside) return
+
+      hoverAmount = 1
+      autoRotate = false
+      targetRotation[0] = (x - 0.5) * 40
+      targetRotation[1] = (0.5 - y) * 28
+    }
+
+    const handlePointerLeave = () => {
+      hoverAmount = 0
+      autoRotate = true
+      targetRotation[1] = 0
+    }
+
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault()
       const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1
@@ -269,13 +310,27 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
 
     canvas.addEventListener("mousedown", handleMouseDown)
     canvas.addEventListener("wheel", handleWheel)
+    wrapperRef.current.addEventListener("pointermove", handlePointerMove)
+    wrapperRef.current.addEventListener("pointerleave", handlePointerLeave)
 
     loadWorldData()
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateCanvasSize()
+    })
+
+    resizeObserver.observe(wrapperRef.current)
+    window.addEventListener("resize", updateCanvasSize)
+    updateCanvasSize()
 
     return () => {
       rotationTimer.stop()
       canvas.removeEventListener("mousedown", handleMouseDown)
       canvas.removeEventListener("wheel", handleWheel)
+      wrapperRef.current?.removeEventListener("pointermove", handlePointerMove)
+      wrapperRef.current?.removeEventListener("pointerleave", handlePointerLeave)
+      window.removeEventListener("resize", updateCanvasSize)
+      resizeObserver.disconnect()
     }
   }, [width, height])
 
@@ -291,11 +346,11 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div ref={wrapperRef} className={`relative w-full h-full ${className}`} style={{ opacity: error ? 1 : undefined }}>
       <canvas
         ref={canvasRef}
-        className="w-full h-auto bg-transparent dark"
-        style={{ maxWidth: "100%", height: "auto" }}
+        className="block w-full h-full bg-transparent dark"
+        style={{ maxWidth: "100%", height: "100%" }}
       />
       {isLoading && !error && (
         <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-bg-primary/40 text-xs tracking-[0.3em] uppercase text-text-secondary">

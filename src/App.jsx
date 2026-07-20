@@ -11,9 +11,9 @@ import Footer from './sections/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="relative min-h-screen bg-black overflow-hidden">
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <HeroSection />
         <ServicesSection />
         <MetricsSection />
@@ -23,7 +23,9 @@ function App() {
         <UncompromiseSection />
         <ContactSection />
       </main>
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   );
 }

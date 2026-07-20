@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import RotatingEarth from '@/components/ui/wireframe-dotted-globe';
+import OrbGridBackground from '@/components/ui/orb-grid-background';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,8 +42,8 @@ export default function HeroSection() {
   );
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-black">
-      <div className="absolute inset-0 z-0 bg-black" />
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-transparent">
+      <OrbGridBackground />
 
       {/* Floating Particles */}
       <div className="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
@@ -136,8 +137,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-primary to-transparent z-10" />
     </section>
   );
 }

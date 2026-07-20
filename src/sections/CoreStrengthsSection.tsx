@@ -25,7 +25,7 @@ const strengths = [
 
 export default function CoreStrengthsSection() {
   return (
-    <section className="py-20 bg-bg-secondary">
+    <section className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import heroGlobeImage from '@/assets/hero-globe.jpg';
+import RotatingEarth from '@/components/ui/wireframe-dotted-globe';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,17 +41,8 @@ export default function HeroSection() {
   );
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Globe */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-transparent to-bg-primary z-10" />
-        <img 
-          src={heroGlobeImage}
-          alt="Digital Globe" 
-          className="w-full h-full object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-bg-primary/40" />
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-black">
+      <div className="absolute inset-0 z-0 bg-black" />
 
       {/* Floating Particles */}
       <div className="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
@@ -87,15 +78,17 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
-        <motion.div
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+            <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
+            className="text-center lg:text-left"
         >
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-3xl mx-auto lg:mx-0"
           >
             Blackgate: Forged in Security.
             <br />
@@ -104,14 +97,14 @@ export default function HeroSection() {
 
           <motion.p 
             variants={itemVariants}
-            className="text-lg sm:text-xl text-text-secondary mb-10 max-w-2xl mx-auto"
+              className="text-lg sm:text-xl text-text-secondary mb-10 max-w-2xl mx-auto lg:mx-0"
           >
             Your uncompromised cloud and cybersecurity fortress.
           </motion.p>
 
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
           >
             <a
               href="#contact"
@@ -128,6 +121,19 @@ export default function HeroSection() {
             </a>
           </motion.div>
         </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            className="relative flex items-center justify-center lg:justify-end"
+          >
+            <div className="relative w-full max-w-[560px] aspect-square opacity-95 lg:opacity-100">
+              <div className="absolute inset-0 rounded-full bg-black/80 blur-3xl" />
+              <RotatingEarth width={680} height={680} className="relative w-full" />
+            </div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Bottom Gradient */}

@@ -22,10 +22,10 @@ const stats = [
 ];
 
 const mapHotspots = [
-  { id: 'us-west', left: 12.5, top: 35.4 },
+  { id: 'us-west', left: 14.8, top: 37.4 },
   { id: 'us-east', left: 25.4, top: 35.3 },
-  { id: 'south-america-north', left: 23.4, top: 55.2 },
-  { id: 'south-america-south', left: 26.5, top: 67.3 },
+  { id: 'south-america-north', left: 26.2, top: 57.8 },
+  { id: 'south-america-south', left: 30.4, top: 63.9 },
   { id: 'europe', left: 45.4, top: 26.0 },
   { id: 'north-africa', left: 45.4, top: 37.4 },
   { id: 'west-africa', left: 45.8, top: 43.2 },
@@ -34,7 +34,7 @@ const mapHotspots = [
   { id: 'india', left: 71.8, top: 41.1 },
   { id: 'southeast-asia', left: 76.2, top: 47.5 },
   { id: 'east-asia', left: 78.8, top: 39.2 },
-  { id: 'australia', left: 80.4, top: 73.4 },
+  { id: 'australia', left: 79.3, top: 67.8 },
 ];
 
 export default function WorldMapSection() {

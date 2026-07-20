@@ -9,21 +9,21 @@ const metrics = [
     icon: Activity,
     value: 99.9,
     suffix: '%',
-    label: 'NET UPTIME',
-    sublabel: '(UP-TIME)',
+    label: 'SERVICE UPTIME',
+    sublabel: '(AVERAGE)',
   },
   {
     icon: Server,
     value: 1000,
     suffix: '+',
-    label: 'Quantum-Grade Servers',
+    label: 'Managed Servers',
     sublabel: '',
   },
   {
     icon: Globe,
     value: 100,
     suffix: '+',
-    label: 'Datacenters Globally',
+    label: 'Global Regions',
     sublabel: '',
   },
 ];
@@ -41,10 +41,10 @@ export default function MetricsSection() {
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-            REAL-TIME TRUST METRICS
+            OPERATIONAL METRICS
           </h2>
           <p className="text-text-secondary">
-            Instant visibility into security posture
+            Clear visibility into platform health
           </p>
         </ScrollReveal>
 
@@ -95,7 +95,7 @@ export default function MetricsSection() {
           className="mt-8 bg-bg-card border border-border-subtle rounded-xl p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-white">Network Performance</h3>
+            <h3 className="text-lg font-semibold text-white">Platform Performance</h3>
             <span className="text-sm text-accent-cyan">Live</span>
           </div>
           <div className="h-32 flex items-end gap-1">

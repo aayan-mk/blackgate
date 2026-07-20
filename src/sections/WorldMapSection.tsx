@@ -7,17 +7,17 @@ const stats = [
   {
     value: 99.9,
     suffix: '%',
-    label: 'Network Uptime',
+    label: 'Platform Uptime',
   },
   {
     value: 1000,
     suffix: '+',
-    label: 'Enterprise Clients',
+    label: 'Active Deployments',
   },
   {
     value: 100,
     suffix: '+',
-    label: 'Datacenters Globally',
+    label: 'Global Regions',
   },
 ];
 
@@ -46,10 +46,10 @@ export default function WorldMapSection() {
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-            CORE STRENGTHS
+            GLOBAL OPERATIONS
           </h2>
           <p className="text-text-secondary">
-            Highly detailed 3D interactive schematic cutaways
+            Regional coverage and infrastructure visibility
           </p>
         </ScrollReveal>
 

@@ -78,7 +78,7 @@ export default function Product() {
         </section>
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="bg-bg-card border border-accent-cyan/25 rounded-2xl p-7 sm:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <GlowCard className="p-7 sm:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <h3 className="text-2xl font-semibold text-white mb-2">Need a tailored product walkthrough?</h3>
               <p className="text-text-secondary">See how Blackgate fits your architecture, controls, and growth goals.</p>
@@ -90,7 +90,7 @@ export default function Product() {
               Explore Resources
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </GlowCard>
         </section>
       </main>
 

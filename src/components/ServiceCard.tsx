@@ -29,7 +29,7 @@ export function ServiceCard({
           alt={title} 
           className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-card to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
       </div>
       <div className="p-5 flex flex-col flex-grow">
         <h3 className="text-lg font-semibold text-white mb-3">{title}</h3>

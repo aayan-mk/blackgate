@@ -149,39 +149,39 @@ export default function ServicesSection() {
         </ScrollReveal>
 
         {/* Carousel */}
-        <div className="relative">
+        <div className="relative group">
           {/* Navigation Buttons */}
           <button
             onClick={() => scroll('left')}
             disabled={!canScrollLeft}
             aria-label="Previous service"
             className={cn(
-              'absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-bg-card border border-border-subtle flex items-center justify-center transition-all',
+              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
               canScrollLeft
-                ? 'text-text-secondary hover:text-accent-cyan hover:border-accent-cyan/50'
-                : 'text-text-muted/50 cursor-not-allowed opacity-60'
+                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
+                : 'border-white/10 text-white/30 cursor-not-allowed'
             )}
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
           </button>
           <button
             onClick={() => scroll('right')}
             disabled={!canScrollRight}
             aria-label="Next service"
             className={cn(
-              'absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-bg-card border border-border-subtle flex items-center justify-center transition-all',
+              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
               canScrollRight
-                ? 'text-text-secondary hover:text-accent-cyan hover:border-accent-cyan/50'
-                : 'text-text-muted/50 cursor-not-allowed opacity-60'
+                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
+                : 'border-white/10 text-white/30 cursor-not-allowed'
             )}
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Cards Container */}
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pb-4"
+            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory py-8 items-stretch"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {services.map((service, index) => (
@@ -194,7 +194,7 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="snap-start shrink-0"
+                className="snap-start shrink-0 flex h-auto"
               >
                 <ServiceCard {...service} />
               </motion.div>
@@ -203,7 +203,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Service Tabs */}
-        <div className="mt-7 flex flex-wrap justify-center gap-2">
+        <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
           {services.map((service, index) => (
             <button
               key={service.title}
@@ -211,10 +211,10 @@ export default function ServicesSection() {
               onClick={() => scrollToIndex(index)}
               aria-pressed={activeIndex === index}
               className={cn(
-                'px-3.5 py-1.5 rounded-full text-xs sm:text-sm border transition-all',
+                'px-4 py-2 rounded-full text-xs sm:text-sm border transition-all duration-300 font-medium',
                 activeIndex === index
-                  ? 'bg-accent-cyan/15 border-accent-cyan text-accent-cyan'
-                  : 'bg-bg-card border-border-subtle text-text-secondary hover:border-accent-cyan/40 hover:text-white'
+                  ? 'bg-white border-white text-black shadow-[0_0_15px_rgba(255,255,255,0.3)]'
+                  : 'bg-black border-white/20 text-white/70 hover:border-white hover:text-white hover:bg-white/5'
               )}
             >
               {service.title}

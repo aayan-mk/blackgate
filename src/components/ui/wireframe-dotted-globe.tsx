@@ -247,6 +247,7 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     const rotationTimer = d3.timer(rotate)
 
     const handleMouseDown = (event: MouseEvent) => {
+      if (window.innerWidth < 1024) return;
       autoRotate = false
       const startX = event.clientX
       const startY = event.clientY
@@ -278,6 +279,7 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     }
 
     const handlePointerMove = (event: PointerEvent) => {
+      if (window.innerWidth < 1024) return;
       const wrapper = wrapperRef.current
       if (!wrapper) return
 
@@ -301,6 +303,7 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     }
 
     const handleWheel = (event: WheelEvent) => {
+      if (window.innerWidth < 1024) return;
       event.preventDefault()
       const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1
       const globeRadius = currentSize / 3
@@ -358,7 +361,7 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
           Loading globe
         </div>
       )}
-      <div className="absolute bottom-4 left-4 text-xs text-muted-foreground px-2 py-1 rounded-md dark bg-neutral-900">
+      <div className="hidden lg:block absolute bottom-4 left-4 text-xs text-muted-foreground px-2 py-1 rounded-md dark bg-neutral-900">
         Drag to rotate • Scroll to zoom
       </div>
     </div>

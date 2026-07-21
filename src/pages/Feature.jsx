@@ -78,7 +78,7 @@ export default function Feature() {
         </section>
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="bg-bg-card border border-border-subtle rounded-2xl p-7 sm:p-10">
+          <GlowCard className="p-7 sm:p-10">
             <h3 className="text-2xl font-semibold text-white mb-3">Want all feature specs in one place?</h3>
             <p className="text-text-secondary mb-6">
               Access deeper technical guidance, implementation notes, and deployment references.
@@ -90,7 +90,7 @@ export default function Feature() {
               Open Resources
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </GlowCard>
         </section>
       </main>
 

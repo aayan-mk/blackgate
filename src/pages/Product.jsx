@@ -4,6 +4,7 @@ import { ShieldCheck, Cloud, Cpu, Workflow, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/sections/Navbar';
 import Footer from '@/sections/Footer';
+import { GlowCard } from '@/components/GlowCard';
 
 const productBlocks = [
   {
@@ -34,7 +35,7 @@ export default function Product() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-transparent">
       <Navbar />
 
       <main className="pt-24">
@@ -58,20 +59,20 @@ export default function Product() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {productBlocks.map((block, index) => (
-              <Motion.article
+              <GlowCard
                 key={block.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="bg-bg-card border border-border-subtle rounded-xl p-6"
+                className="p-6"
               >
                 <div className="w-11 h-11 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center mb-4">
                   <block.icon className="w-5 h-5 text-accent-cyan" />
                 </div>
                 <h2 className="text-xl font-semibold text-white mb-2">{block.title}</h2>
                 <p className="text-text-secondary">{block.text}</p>
-              </Motion.article>
+              </GlowCard>
             ))}
           </div>
         </section>

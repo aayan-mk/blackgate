@@ -3,6 +3,7 @@ import { motion as Motion } from 'framer-motion';
 import { BookOpen, Shield, FileText, Wrench, ArrowRight } from 'lucide-react';
 import Navbar from '@/sections/Navbar';
 import Footer from '@/sections/Footer';
+import { GlowCard } from '@/components/GlowCard';
 
 const resources = [
   {
@@ -33,7 +34,7 @@ export default function Resources() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-transparent">
       <Navbar />
 
       <main className="pt-24">
@@ -57,13 +58,13 @@ export default function Resources() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {resources.map((item, index) => (
-              <Motion.article
+              <GlowCard
                 key={item.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="bg-bg-card border border-border-subtle rounded-xl p-6"
+                className="p-6"
               >
                 <div className="w-11 h-11 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center mb-4">
                   <item.icon className="w-5 h-5 text-accent-cyan" />
@@ -76,7 +77,7 @@ export default function Resources() {
                     </li>
                   ))}
                 </ul>
-              </Motion.article>
+              </GlowCard>
             ))}
           </div>
         </section>

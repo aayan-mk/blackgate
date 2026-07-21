@@ -8,12 +8,12 @@ interface StrengthCardProps {
 
 export function StrengthCard({ image, title, description }: StrengthCardProps) {
   return (
-    <GlowCard className="h-full">
+    <GlowCard className="h-full flex flex-col">
       <div className="relative h-56 overflow-hidden">
         <img 
           src={image} 
           alt={title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent" />
       </div>

@@ -3,291 +3,346 @@ import { ArrowLeft, Code, CheckCircle2, Zap, Globe, Smartphone, Server, Shield }
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import ServiceQuickNav from '../components/ServiceQuickNav'
-import './ServicePages.css'
+import Navbar from '@/sections/Navbar'
+import Footer from '@/sections/Footer'
+import { GlowCard } from '@/components/GlowCard'
 
 function WebDevelopment() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   return (
-    <div className="service-page">
+    <div className="min-h-screen bg-transparent">
+      <Navbar />
+
       {/* Hero Section */}
-      <section className="service-hero">
-        <div className="container">
-          <Link to="/" className="back-button">
-            <ArrowLeft size={20} />
-            <span>Back to Home</span>
-          </Link>
-          
+      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 border-b border-accent-cyan/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="flex flex-col items-center text-center"
           >
-            <div className="service-hero-icon">
-              <Code size={64} />
+            <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-accent-cyan/10 to-accent-cyan/5 border-2 border-accent-cyan/30 rounded-2xl flex items-center justify-center mb-8 text-accent-cyan">
+              <Code size={48} className="sm:w-16 sm:h-16" />
             </div>
-            <h1>Web Development</h1>
-            <p className="service-hero-subtitle">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+              Web <span className="text-gradient-cyan">Development</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
               Modern, secure, and lightning-fast web applications built with precision engineering.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="service-nav-shell">
-        <div className="container">
+      <section className="py-6 border-b border-border-subtle">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ServiceQuickNav />
         </div>
       </section>
 
       {/* What We Build */}
-      <section className="section">
-        <div className="container">
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="section-header"
+            className="text-center max-w-3xl mx-auto mb-14"
           >
-            <h2>What We Build</h2>
-            <p className="section-subtitle">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">What We Build</h2>
+            <p className="text-lg text-text-secondary">
               From concept to deployment, we craft digital experiences that users love and businesses depend on.
             </p>
           </motion.div>
 
-          <div className="service-features-grid">
-            <motion.div
-              className="feature-card"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <GlowCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
+              className="p-8"
             >
-              <Globe className="feature-icon" />
-              <h3>Progressive Web Apps</h3>
-              <p>
+              <Globe className="w-12 h-12 text-accent-cyan mb-6" />
+              <h3 className="text-xl font-semibold text-white mb-3">Progressive Web Apps</h3>
+              <p className="text-text-secondary leading-relaxed">
                 Fast, reliable, and engaging experiences that work seamlessly across all devices. 
                 Offline capabilities, push notifications, and native app-like performance.
               </p>
-            </motion.div>
+            </GlowCard>
 
-            <motion.div
-              className="feature-card"
+            <GlowCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="p-8"
             >
-              <Smartphone className="feature-icon" />
-              <h3>Responsive Design</h3>
-              <p>
+              <Smartphone className="w-12 h-12 text-accent-cyan mb-6" />
+              <h3 className="text-xl font-semibold text-white mb-3">Responsive Design</h3>
+              <p className="text-text-secondary leading-relaxed">
                 Pixel-perfect interfaces that adapt beautifully to any screen size. Mobile-first 
                 approach ensures optimal experience on smartphones, tablets, and desktops.
               </p>
-            </motion.div>
+            </GlowCard>
 
-            <motion.div
-              className="feature-card"
+            <GlowCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="p-8"
             >
-              <Server className="feature-icon" />
-              <h3>API Development</h3>
-              <p>
+              <Server className="w-12 h-12 text-accent-cyan mb-6" />
+              <h3 className="text-xl font-semibold text-white mb-3">API Development</h3>
+              <p className="text-text-secondary leading-relaxed">
                 RESTful and GraphQL APIs built for performance and scalability. Clean documentation, 
                 versioning, and authentication out of the box.
               </p>
-            </motion.div>
+            </GlowCard>
 
-            <motion.div
-              className="feature-card"
+            <GlowCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              className="p-8"
             >
-              <Zap className="feature-icon" />
-              <h3>Performance Optimization</h3>
-              <p>
+              <Zap className="w-12 h-12 text-accent-cyan mb-6" />
+              <h3 className="text-xl font-semibold text-white mb-3">Performance Optimization</h3>
+              <p className="text-text-secondary leading-relaxed">
                 Sub-second load times through code splitting, lazy loading, CDN delivery, and 
                 aggressive caching strategies. Every millisecond counts.
               </p>
-            </motion.div>
+            </GlowCard>
 
-            <motion.div
-              className="feature-card"
+            <GlowCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
+              className="p-8"
             >
-              <Shield className="feature-icon" />
-              <h3>Security First</h3>
-              <p>
+              <Shield className="w-12 h-12 text-accent-cyan mb-6" />
+              <h3 className="text-xl font-semibold text-white mb-3">Security First</h3>
+              <p className="text-text-secondary leading-relaxed">
                 HTTPS everywhere, CSP headers, XSS protection, CSRF tokens, and secure authentication. 
                 Security isn't a feature—it's the foundation.
               </p>
-            </motion.div>
+            </GlowCard>
 
-            <motion.div
-              className="feature-card"
+            <GlowCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
+              className="p-8"
             >
-              <Code className="feature-icon" />
-              <h3>Clean Architecture</h3>
-              <p>
+              <Code className="w-12 h-12 text-accent-cyan mb-6" />
+              <h3 className="text-xl font-semibold text-white mb-3">Clean Architecture</h3>
+              <p className="text-text-secondary leading-relaxed">
                 Maintainable, testable code with comprehensive documentation. Future developers 
                 (including you) will thank you for the clarity.
               </p>
-            </motion.div>
+            </GlowCard>
           </div>
         </div>
       </section>
 
       {/* Technology Stack */}
-      <section className="section dark-section">
-        <div className="container">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-accent-cyan/[0.02] border-y border-accent-cyan/10 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="section-header"
+            className="text-center max-w-3xl mx-auto mb-14"
           >
-            <h2>Our Web Development Stack</h2>
-            <p className="section-subtitle">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Our Web Development Stack</h2>
+            <p className="text-lg text-text-secondary">
               Battle-tested technologies chosen for reliability, performance, and long-term maintainability.
             </p>
           </motion.div>
 
-          <div className="tech-stack-detail">
-            <div className="tech-category-detail">
-              <h3>Front-End Frameworks</h3>
-              <ul>
-                <li><CheckCircle2 size={18} /> <strong>React</strong> - Component-based UI with unmatched ecosystem</li>
-                <li><CheckCircle2 size={18} /> <strong>Next.js</strong> - Server-side rendering and static generation</li>
-                <li><CheckCircle2 size={18} /> <strong>TypeScript</strong> - Type safety that prevents runtime errors</li>
-                <li><CheckCircle2 size={18} /> <strong>Tailwind CSS</strong> - Utility-first styling for rapid development</li>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <GlowCard className="p-8">
+              <h3 className="text-xl font-semibold text-accent-cyan mb-6">Front-End Frameworks</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">React</strong> - Component-based UI with unmatched ecosystem</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Next.js</strong> - Server-side rendering and static generation</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">TypeScript</strong> - Type safety that prevents runtime errors</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Tailwind CSS</strong> - Utility-first styling for rapid development</span>
+                </li>
               </ul>
-            </div>
+            </GlowCard>
 
-            <div className="tech-category-detail">
-              <h3>Back-End & APIs</h3>
-              <ul>
-                <li><CheckCircle2 size={18} /> <strong>Node.js</strong> - JavaScript runtime for high-performance servers</li>
-                <li><CheckCircle2 size={18} /> <strong>Python (Django/FastAPI)</strong> - Robust frameworks for complex logic</li>
-                <li><CheckCircle2 size={18} /> <strong>GraphQL</strong> - Efficient data fetching with precise queries</li>
-                <li><CheckCircle2 size={18} /> <strong>REST APIs</strong> - Standard, cacheable HTTP endpoints</li>
+            <GlowCard className="p-8">
+              <h3 className="text-xl font-semibold text-accent-cyan mb-6">Back-End & APIs</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Node.js</strong> - JavaScript runtime for high-performance servers</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Python (Django/FastAPI)</strong> - Robust frameworks for complex logic</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">GraphQL</strong> - Efficient data fetching with precise queries</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">REST APIs</strong> - Standard, cacheable HTTP endpoints</span>
+                </li>
               </ul>
-            </div>
+            </GlowCard>
 
-            <div className="tech-category-detail">
-              <h3>Databases & Storage</h3>
-              <ul>
-                <li><CheckCircle2 size={18} /> <strong>PostgreSQL</strong> - Reliable relational database with advanced features</li>
-                <li><CheckCircle2 size={18} /> <strong>MongoDB</strong> - Flexible document storage for dynamic data</li>
-                <li><CheckCircle2 size={18} /> <strong>Redis</strong> - In-memory caching for instant response times</li>
-                <li><CheckCircle2 size={18} /> <strong>AWS S3</strong> - Scalable object storage for media and assets</li>
+            <GlowCard className="p-8">
+              <h3 className="text-xl font-semibold text-accent-cyan mb-6">Databases & Storage</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">PostgreSQL</strong> - Reliable relational database with advanced features</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">MongoDB</strong> - Flexible document storage for dynamic data</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Redis</strong> - In-memory caching for instant response times</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">AWS S3</strong> - Scalable object storage for media and assets</span>
+                </li>
               </ul>
-            </div>
+            </GlowCard>
 
-            <div className="tech-category-detail">
-              <h3>DevOps & Deployment</h3>
-              <ul>
-                <li><CheckCircle2 size={18} /> <strong>Docker</strong> - Containerization for consistent environments</li>
-                <li><CheckCircle2 size={18} /> <strong>Kubernetes</strong> - Orchestration for scaling and reliability</li>
-                <li><CheckCircle2 size={18} /> <strong>CI/CD Pipelines</strong> - Automated testing and deployment</li>
-                <li><CheckCircle2 size={18} /> <strong>AWS/Azure/GCP</strong> - Cloud infrastructure that scales with you</li>
+            <GlowCard className="p-8">
+              <h3 className="text-xl font-semibold text-accent-cyan mb-6">DevOps & Deployment</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Docker</strong> - Containerization for consistent environments</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">Kubernetes</strong> - Orchestration for scaling and reliability</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">CI/CD Pipelines</strong> - Automated testing and deployment</span>
+                </li>
+                <li className="flex items-start gap-3 text-text-secondary">
+                  <CheckCircle2 size={20} className="text-accent-cyan shrink-0 mt-0.5" />
+                  <span><strong className="text-white font-semibold">AWS/Azure/GCP</strong> - Cloud infrastructure that scales with you</span>
+                </li>
               </ul>
-            </div>
+            </GlowCard>
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section className="section">
-        <div className="container">
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="section-header"
+            className="text-center max-w-3xl mx-auto mb-14"
           >
-            <h2>Our Development Process</h2>
-            <p className="section-subtitle">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Our Development Process</h2>
+            <p className="text-lg text-text-secondary">
               From wireframes to production, every step is planned, documented, and validated.
             </p>
           </motion.div>
 
-          <div className="process-timeline">
-            <div className="process-step">
-              <div className="process-number">01</div>
-              <h3>Discovery & Planning</h3>
-              <p>
+          <div className="flex flex-col gap-6 max-w-3xl mx-auto">
+            <GlowCard className="p-8 pl-16 relative">
+              <div className="absolute left-6 top-6 text-2xl font-bold text-accent-cyan/30">01</div>
+              <h3 className="text-xl font-semibold text-white mb-3">Discovery & Planning</h3>
+              <p className="text-text-secondary leading-relaxed">
                 We start by understanding your business goals, target audience, and technical requirements. 
                 Detailed wireframes and user flows ensure everyone's aligned before development begins.
               </p>
-            </div>
+            </GlowCard>
 
-            <div className="process-step">
-              <div className="process-number">02</div>
-              <h3>Design & Prototyping</h3>
-              <p>
+            <GlowCard className="p-8 pl-16 relative">
+              <div className="absolute left-6 top-6 text-2xl font-bold text-accent-cyan/30">02</div>
+              <h3 className="text-xl font-semibold text-white mb-3">Design & Prototyping</h3>
+              <p className="text-text-secondary leading-relaxed">
                 High-fidelity mockups and interactive prototypes bring your vision to life. User testing 
                 validates design decisions before we write production code.
               </p>
-            </div>
+            </GlowCard>
 
-            <div className="process-step">
-              <div className="process-number">03</div>
-              <h3>Development & Testing</h3>
-              <p>
+            <GlowCard className="p-8 pl-16 relative">
+              <div className="absolute left-6 top-6 text-2xl font-bold text-accent-cyan/30">03</div>
+              <h3 className="text-xl font-semibold text-white mb-3">Development & Testing</h3>
+              <p className="text-text-secondary leading-relaxed">
                 Agile sprints with regular check-ins. Automated testing catches bugs early. Code reviews 
                 ensure quality and knowledge sharing across the team.
               </p>
-            </div>
+            </GlowCard>
 
-            <div className="process-step">
-              <div className="process-number">04</div>
-              <h3>Deployment & Monitoring</h3>
-              <p>
+            <GlowCard className="p-8 pl-16 relative">
+              <div className="absolute left-6 top-6 text-2xl font-bold text-accent-cyan/30">04</div>
+              <h3 className="text-xl font-semibold text-white mb-3">Deployment & Monitoring</h3>
+              <p className="text-text-secondary leading-relaxed">
                 Staged rollouts minimize risk. Real-time monitoring catches issues before users do. 
                 Post-launch support ensures smooth operation and continuous improvement.
               </p>
-            </div>
+            </GlowCard>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section dark-section">
-        <div className="container">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-accent-cyan/[0.02] border-y border-accent-cyan/10 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="service-cta"
+            className="text-center bg-bg-card/50 border border-accent-cyan/20 rounded-2xl p-10 sm:p-16 max-w-4xl mx-auto backdrop-blur-sm"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2>Ready to Build Something Exceptional?</h2>
-            <p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Build Something Exceptional?</h2>
+            <p className="text-lg text-text-secondary mb-10 max-w-2xl mx-auto">
               Let's discuss your project requirements and create a development roadmap tailored to your goals.
             </p>
-            <Link to="/#contact" className="primary-button">
+            <Link to="/#contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent-cyan text-bg-primary font-bold rounded-full hover:bg-accent-teal hover:scale-105 transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]">
               Start Your Project
-              <Code size={18} />
+              <Code size={20} />
             </Link>
           </motion.div>
         </div>
       </section>
+
+      <Footer />
     </div>
   )
 }

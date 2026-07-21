@@ -24,7 +24,7 @@ export function FeatureCard({ number, title, description, image }: FeatureCardPr
           <img 
             src={image} 
             alt={title} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
           />
         </div>
       </div>

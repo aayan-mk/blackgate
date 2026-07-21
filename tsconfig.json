@@ -10,7 +10,6 @@
     "strict": false,
     "noEmit": true,
     "skipLibCheck": true,
-    "ignoreDeprecations": "6.0",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",

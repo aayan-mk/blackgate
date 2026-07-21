@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { Activity, Server, Globe } from 'lucide-react';
+import { GlowCard } from '@/components/GlowCard';
 
 const metrics = [
   {
@@ -51,13 +52,13 @@ export default function MetricsSection() {
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {metrics.map((metric, index) => (
-            <motion.div
+            <GlowCard
               key={metric.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative bg-bg-card border border-border-subtle rounded-xl p-6 hover:border-accent-cyan/50 transition-all duration-300 group"
+              className="p-6"
             >
               {/* Icon */}
               <div className="w-12 h-12 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center mb-4 group-hover:bg-accent-cyan/20 transition-colors">
@@ -82,17 +83,17 @@ export default function MetricsSection() {
 
               {/* Glow Effect */}
               <div className="absolute inset-0 rounded-xl bg-accent-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-            </motion.div>
+            </GlowCard>
           ))}
         </div>
 
         {/* Chart Visualization */}
-        <motion.div
+        <GlowCard
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 bg-bg-card border border-border-subtle rounded-xl p-6"
+          className="mt-8 p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-white">Platform Performance</h3>
@@ -123,7 +124,7 @@ export default function MetricsSection() {
               />
             ))}
           </div>
-        </motion.div>
+        </GlowCard>
       </div>
     </section>
   );

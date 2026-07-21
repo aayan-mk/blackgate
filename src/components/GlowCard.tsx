@@ -1,24 +1,26 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface GlowCardProps {
+interface GlowCardProps extends HTMLMotionProps<"div"> {
   children: ReactNode;
   className?: string;
-  hoverScale?: boolean;
 }
 
-export function GlowCard({ children, className, hoverScale = true }: GlowCardProps) {
+export function GlowCard({ children, className, ...props }: GlowCardProps) {
   return (
-    <div
+    <motion.div
+      {...props}
       className={cn(
         'group relative bg-bg-card border border-border-subtle rounded-lg overflow-hidden',
-        'transition-all duration-300',
+        'transition-colors duration-300',
         'hover:border-accent-cyan/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]',
-        hoverScale && 'hover:scale-[1.02]',
         className
       )}
+      whileHover={{ y: -8, ...((props.whileHover as object) || {}) }}
+      transition={{ type: 'spring', stiffness: 300, ...((props.transition as object) || {}) }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

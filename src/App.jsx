@@ -11,7 +11,7 @@ import Footer from './sections/Footer';
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       <Navbar />
       <main className="relative z-10">
         <HeroSection />

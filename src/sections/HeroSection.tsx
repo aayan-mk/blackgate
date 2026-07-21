@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, lazy, Suspense } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import RotatingEarth from '@/components/ui/wireframe-dotted-globe';
-import OrbGridBackground from '@/components/ui/orb-grid-background';
+
+const RotatingEarth = lazy(() => import('@/components/ui/wireframe-dotted-globe'));
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,8 +43,6 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-transparent">
-      <OrbGridBackground />
-
       {/* Floating Particles */}
       <div className="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
         {particles.map((particle) => (
@@ -131,7 +129,9 @@ export default function HeroSection() {
           >
             <div className="relative w-full max-w-[500px] aspect-square opacity-95 lg:opacity-100">
               <div className="absolute inset-0 rounded-full bg-black/80 blur-3xl" />
-              <RotatingEarth width={620} height={620} className="relative w-full" />
+              <Suspense fallback={<div className="w-full h-full flex items-center justify-center opacity-50"><div className="w-10 h-10 border-4 border-accent-cyan border-t-transparent rounded-full animate-spin" /></div>}>
+                <RotatingEarth width={620} height={620} className="relative w-full" />
+              </Suspense>
             </div>
           </motion.div>
         </div>

@@ -5,6 +5,7 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { GlowCard } from '@/components/GlowCard';
 
 const contactInfo = [
   {
@@ -52,7 +53,7 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}
           <ScrollReveal>
-            <div className="bg-bg-card border border-border-subtle rounded-xl p-6 sm:p-8">
+            <GlowCard className="p-6 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                 Secure your digital assets
               </h2>
@@ -144,7 +145,7 @@ export default function ContactSection() {
                   </Button>
                 </div>
               </form>
-            </div>
+            </GlowCard>
           </ScrollReveal>
 
           {/* Contact Info */}
@@ -161,13 +162,13 @@ export default function ContactSection() {
 
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
-                  <motion.div
+                  <GlowCard
                     key={info.label}
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-start gap-4 p-4 bg-bg-card border border-border-subtle rounded-lg hover:border-accent-cyan/30 transition-colors"
+                    className="flex items-start gap-4 p-4"
                   >
                     <div className="w-10 h-10 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-5 h-5 text-accent-cyan" />
@@ -176,7 +177,7 @@ export default function ContactSection() {
                       <p className="text-sm text-text-muted">{info.label}</p>
                       <p className="text-white">{info.value}</p>
                     </div>
-                  </motion.div>
+                  </GlowCard>
                 ))}
               </div>
 

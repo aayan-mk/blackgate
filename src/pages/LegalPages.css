@@ -1,20 +1,20 @@
 /* Legal Pages Styling */
 
 .legal-page {
-  background: var(--black);
+  background: transparent;
   color: var(--off-white);
   min-height: 100vh;
 }
 
 .legal-hero {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(10, 10, 10, 0.95) 100%);
+  background: transparent;
   padding: 8rem 2rem 4rem;
   border-bottom: 1px solid rgba(0, 212, 255, 0.2);
   text-align: center;
 }
 
 .legal-hero.security-hero {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(10, 10, 10, 0.95) 100%);
+  background: transparent;
 }
 
 .legal-icon {

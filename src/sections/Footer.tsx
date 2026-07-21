@@ -1,4 +1,5 @@
-import logoImage from '@/assets/logo.png';
+import { Link } from 'react-router-dom';
+import whiteLogoImage from '@/assets/white-logo.png';
 
 const footerLinks = {
   Company: ['About', 'Careers', 'Press', 'Contact'],
@@ -14,13 +15,16 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Logo & Description */}
           <div className="col-span-2 md:col-span-1">
-            <a href="#home" className="inline-flex items-center mb-4" aria-label="Blackgate home">
+            <Link to="/" className="flex items-center gap-3 group mb-4" aria-label="Blackgate home">
               <img
-                src={logoImage}
+                src={whiteLogoImage}
                 alt="Blackgate logo"
-                className="h-12 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
-            </a>
+              <span className="text-sm sm:text-base font-semibold tracking-[0.28em] text-white uppercase">
+                BLACKGATE
+              </span>
+            </Link>
             <p className="text-sm text-text-secondary">
               Forged in Security. Perfected by Intelligence.
             </p>

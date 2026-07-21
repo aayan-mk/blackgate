@@ -107,7 +107,7 @@ export default function HeroSection() {
               >
                 <a
                   href="#contact"
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-3 sm:py-4 text-base font-medium text-bg-primary bg-accent-cyan rounded-full hover:bg-accent-teal transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] w-full sm:w-auto"
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-3 sm:py-4 text-base font-medium text-bg-primary bg-accent-cyan rounded-full hover:bg-accent-teal transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(6, 182, 212,0.4)] w-full sm:w-auto"
                 >
                   Get Started
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />

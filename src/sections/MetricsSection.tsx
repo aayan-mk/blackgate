@@ -11,21 +11,21 @@ const metrics = [
     value: 99.9,
     suffix: '%',
     label: 'SERVICE UPTIME',
-    sublabel: '(AVERAGE)',
+    comparison: '+2.41% vs last month',
   },
   {
     icon: Server,
     value: 1000,
     suffix: '+',
     label: 'Managed Servers',
-    sublabel: '',
+    comparison: '+180 vs last month',
   },
   {
     icon: Globe,
     value: 100,
     suffix: '+',
     label: 'Global Regions',
-    sublabel: '',
+    comparison: '+12 vs last month',
   },
 ];
 
@@ -77,8 +77,8 @@ export default function MetricsSection() {
 
               {/* Label */}
               <h3 className="text-lg font-semibold text-white">{metric.label}</h3>
-              {metric.sublabel && (
-                <p className="text-sm text-text-muted">{metric.sublabel}</p>
+              {metric.comparison && (
+                <p className="text-sm text-accent-cyan font-medium mt-1">{metric.comparison}</p>
               )}
 
               {/* Glow Effect */}
@@ -97,13 +97,19 @@ export default function MetricsSection() {
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-white">Platform Performance</h3>
-            <span className="text-sm text-accent-cyan">Live</span>
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span className="text-sm font-semibold text-emerald-400 tracking-wider">Live</span>
+            </div>
           </div>
-          <div className="h-32 flex items-end gap-1">
+          <div className="h-32 flex items-end gap-1.5">
             {barHeights.map((height, i) => (
               <motion.div
                 key={i}
-                className="flex-1 h-full bg-accent-cyan/30 rounded-t origin-bottom"
+                className="flex-1 h-full bg-accent-cyan/40 rounded-t origin-bottom hover:bg-accent-cyan/80 transition-colors duration-200"
                 initial={{ scaleY: 0.2 }}
                 animate={
                   shouldReduceMotion

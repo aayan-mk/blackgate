@@ -144,7 +144,7 @@ export default function ServicesSection() {
             Our Services
           </h2>
           <p className="text-text-secondary">
-            Four mission-critical pillars. One uncompromising standard.
+            Four pillars of digital defense. One uncompromising standard.
           </p>
         </ScrollReveal>
 

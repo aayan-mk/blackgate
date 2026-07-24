@@ -9,17 +9,17 @@ const strengths = [
   {
     image: coreCloudNativeImage,
     title: 'Cloud Native',
-    description: 'Detailed microservices cluster on a layered architecture',
+    description: 'Scalable infrastructure built on a cloud-first foundation.',
   },
   {
     image: coreServerlessImage,
     title: 'Serverless',
-    description: 'Function compute cells of function compute calls',
+    description: 'Function-as-a-service for modern apps with maximum efficiency.',
   },
   {
     image: coreAiImage,
     title: 'AI Driven',
-    description: 'Cognitive neural networking deep learning profiling',
+    description: 'Cognitive threat intelligence driving proactive protection.',
   },
 ];
 
@@ -33,7 +33,7 @@ export default function CoreStrengthsSection() {
             CORE STRENGTHS
           </h2>
           <p className="text-text-secondary">
-            Highly detailed 3D interactive schematic cutaways
+            Highly skilled to 3D interactive schematic pathways
           </p>
         </ScrollReveal>
 

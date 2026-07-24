@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FeatureCard } from '@/components/FeatureCard';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import ContactSection from './ContactSection';
 import featureKubernetesImage from '@/assets/feature-kubernetes.jpg';
 import featureEdgeNetworkImage from '@/assets/feature-edge-network.jpg';
 import featureZeroTrustImage from '@/assets/feature-zero-trust.jpg';
@@ -11,31 +12,31 @@ const features = [
   {
     number: 1,
     title: 'Managed Kubernetes',
-    description: 'Container orchestration with automated deployment, scaling, and management.',
+    description: 'Container orchestration with auto-scaling, self-healing, and zero-downtime management.',
     image: featureKubernetesImage,
   },
   {
     number: 2,
     title: 'Global Edge Network',
-    description: 'Worldwide CDN with low-latency content delivery across 100+ locations.',
+    description: 'Worldwide CDN with low latency and high availability.',
     image: featureEdgeNetworkImage,
   },
   {
     number: 3,
     title: 'Zero-Trust Architecture',
-    description: 'Security framework requiring strict identity verification for every access.',
+    description: 'Security by identity, least privilege for every access.',
     image: featureZeroTrustImage,
   },
   {
     number: 4,
     title: 'Scalability & Performance',
-    description: 'Auto-scaling infrastructure that adapts to your workload demands.',
+    description: 'Auto-scaling infrastructure for consistent performance.',
     image: featureScalabilityImage,
   },
   {
     number: 5,
-    title: 'AI-Driven Security',
-    description: 'Intelligent threat detection and response powered by machine learning.',
+    title: 'AI Driven Security',
+    description: 'Smart defense by machine learning & behavioral analytics.',
     image: featureAiSecurityImage,
   },
 ];
@@ -50,23 +51,31 @@ export default function UncompromiseSection() {
             THE BLACKGATE UNCOMPROMISE
           </h2>
           <p className="text-text-secondary">
-            The intelligent & continuous advantage delivery
+            The infrastructure. Continuous advantage delivery.
           </p>
         </ScrollReveal>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-            >
-              <FeatureCard {...feature} />
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Features columns (Left, approx 67%, 8 cols) */}
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="h-full"
+              >
+                <FeatureCard {...feature} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Contact Form Column (Right, approx 33%, 4 cols) */}
+          <div className="lg:col-span-4 w-full">
+            <ContactSection />
+          </div>
         </div>
       </div>
     </section>

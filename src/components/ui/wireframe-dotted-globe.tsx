@@ -1,7 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import * as d3 from "d3"
+import landData from "@/assets/ne_110m_land.json"
+import dotsData from "@/assets/world-dots.json"
 
 interface RotatingEarthProps {
   width?: number
@@ -9,11 +11,15 @@ interface RotatingEarthProps {
   className?: string
 }
 
+interface DotData {
+  lng: number
+  lat: number
+  visible: boolean
+}
+
 export default function RotatingEarth({ width = 800, height = 800, className = "" }: RotatingEarthProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!canvasRef.current || !wrapperRef.current) return
@@ -54,97 +60,12 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     const targetRotation = [0, 0]
     const currentRotation = [0, 0]
 
-    const pointInPolygon = (point: [number, number], polygon: number[][]): boolean => {
-      const [x, y] = point
-      let inside = false
-
-      for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-        const [xi, yi] = polygon[i]
-        const [xj, yj] = polygon[j]
-
-        if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) {
-          inside = !inside
-        }
-      }
-
-      return inside
-    }
-
-    const pointInFeature = (point: [number, number], feature: any): boolean => {
-      const geometry = feature.geometry
-
-      if (geometry.type === "Polygon") {
-        const coordinates = geometry.coordinates
-
-        if (!pointInPolygon(point, coordinates[0])) {
-          return false
-        }
-
-        for (let i = 1; i < coordinates.length; i++) {
-          if (pointInPolygon(point, coordinates[i])) {
-            return false
-          }
-        }
-
-        return true
-      } else if (geometry.type === "MultiPolygon") {
-        for (const polygon of geometry.coordinates) {
-          if (pointInPolygon(point, polygon[0])) {
-            let inHole = false
-
-            for (let i = 1; i < polygon.length; i++) {
-              if (pointInPolygon(point, polygon[i])) {
-                inHole = true
-                break
-              }
-            }
-
-            if (!inHole) {
-              return true
-            }
-          }
-        }
-
-        return false
-      }
-
-      return false
-    }
-
-    const generateDotsInPolygon = (feature: any, dotSpacing = 16) => {
-      const dots: [number, number][] = []
-      const bounds = d3.geoBounds(feature)
-      const [[minLng, minLat], [maxLng, maxLat]] = bounds
-
-      const stepSize = dotSpacing * 0.08
-      let pointsGenerated = 0
-
-      for (let lng = minLng; lng <= maxLng; lng += stepSize) {
-        for (let lat = minLat; lat <= maxLat; lat += stepSize) {
-          const point: [number, number] = [lng, lat]
-
-          if (pointInFeature(point, feature)) {
-            dots.push(point)
-            pointsGenerated++
-          }
-        }
-      }
-
-      console.log(
-        `[v0] Generated ${pointsGenerated} points for land feature:`,
-        feature.properties?.featurecla || "Land",
-      )
-      return dots
-    }
-
-    interface DotData {
-      lng: number
-      lat: number
-      visible: boolean
-    }
-
-    const allDots: DotData[] = []
-    let landFeatures: any
+    const allDots: DotData[] = (dotsData as [number, number][]).map(([lng, lat]) => ({
+      lng,
+      lat,
+      visible: true,
+    }))
+    const landFeatures = landData
 
     const render = () => {
       if (!currentSize) return
@@ -198,40 +119,8 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
       }
     }
 
-    const loadWorldData = async () => {
-      try {
-        setIsLoading(true)
-
-        const response = await fetch(
-          "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/110m/physical/ne_110m_land.json",
-        )
-
-        if (!response.ok) throw new Error("Failed to load land data")
-
-        landFeatures = await response.json()
-
-        let totalDots = 0
-        landFeatures.features.forEach((feature: any) => {
-          const dots = generateDotsInPolygon(feature, 16)
-          dots.forEach(([lng, lat]) => {
-            allDots.push({ lng, lat, visible: true })
-            totalDots++
-          })
-        })
-
-        console.log(`[v0] Total dots generated: ${totalDots} across ${landFeatures.features.length} land features`)
-
-        render()
-        setIsLoading(false)
-      } catch (err) {
-        setError("Failed to load land map data")
-        setIsLoading(false)
-      }
-    }
-
     let autoRotate = true
     const rotationSpeed = 0.5
-    let hoverAmount = 0
 
     const rotate = () => {
       if (autoRotate) {
@@ -240,14 +129,14 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
 
       currentRotation[0] += (targetRotation[0] - currentRotation[0]) * 0.08
       currentRotation[1] += (targetRotation[1] - currentRotation[1]) * 0.08
-      projection.rotate(currentRotation)
+      projection.rotate(currentRotation as [number, number, number])
       render()
     }
 
     const rotationTimer = d3.timer(rotate)
 
     const handleMouseDown = (event: MouseEvent) => {
-      if (window.innerWidth < 1024) return;
+      if (window.innerWidth < 1024) return
       autoRotate = false
       const startX = event.clientX
       const startY = event.clientY
@@ -279,7 +168,7 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     }
 
     const handlePointerMove = (event: PointerEvent) => {
-      if (window.innerWidth < 1024) return;
+      if (window.innerWidth < 1024) return
       const wrapper = wrapperRef.current
       if (!wrapper) return
 
@@ -290,20 +179,18 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
       const isInside = x >= 0 && x <= 1 && y >= 0 && y <= 1
       if (!isInside) return
 
-      hoverAmount = 1
       autoRotate = false
       targetRotation[0] = (x - 0.5) * 40
       targetRotation[1] = (0.5 - y) * 28
     }
 
     const handlePointerLeave = () => {
-      hoverAmount = 0
       autoRotate = true
       targetRotation[1] = 0
     }
 
     const handleWheel = (event: WheelEvent) => {
-      if (window.innerWidth < 1024) return;
+      if (window.innerWidth < 1024) return
       event.preventDefault()
       const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1
       const globeRadius = currentSize / 3
@@ -316,8 +203,6 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     canvas.addEventListener("wheel", handleWheel)
     wrapperRef.current.addEventListener("pointermove", handlePointerMove)
     wrapperRef.current.addEventListener("pointerleave", handlePointerLeave)
-
-    loadWorldData()
 
     const resizeObserver = new ResizeObserver(() => {
       updateCanvasSize()
@@ -338,29 +223,13 @@ export default function RotatingEarth({ width = 800, height = 800, className = "
     }
   }, [width, height])
 
-  if (error) {
-    return (
-      <div className={`dark flex items-center justify-center bg-card rounded-2xl p-8 ${className}`}>
-        <div className="text-center">
-          <p className="dark text-destructive font-semibold mb-2">Error loading Earth visualization</p>
-          <p className="dark text-muted-foreground text-sm">{error}</p>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <div ref={wrapperRef} className={`relative w-full h-full ${className}`} style={{ opacity: error ? 1 : undefined }}>
+    <div ref={wrapperRef} className={`relative w-full h-full ${className}`}>
       <canvas
         ref={canvasRef}
         className="block w-full h-full bg-transparent dark"
         style={{ maxWidth: "100%", height: "100%" }}
       />
-      {isLoading && !error && (
-        <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-bg-primary/40 text-xs tracking-[0.3em] uppercase text-text-secondary">
-          Loading globe
-        </div>
-      )}
       <div className="hidden lg:block absolute bottom-4 left-4 text-xs text-muted-foreground px-2 py-1 rounded-md dark bg-neutral-900">
         Drag to rotate • Scroll to zoom
       </div>

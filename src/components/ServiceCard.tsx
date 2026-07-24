@@ -1,5 +1,5 @@
 import { GlowCard } from './GlowCard';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface ServiceCardProps {
@@ -34,15 +34,14 @@ export function ServiceCard({
       <div className="p-5 flex flex-col flex-grow">
         <h3 className="text-lg font-semibold text-white mb-3">{title}</h3>
         {description && <p className="text-sm text-text-secondary mb-3">{description}</p>}
-        <ul className="space-y-1.5 mb-3">
+        <ul className="space-y-1.5 mb-4">
           {points.map((point, index) => (
             <li key={index} className="text-sm text-text-secondary flex items-start">
-              <span className="text-accent-cyan mr-2">•</span>
-              {point}
+              <Check className="w-4 h-4 text-accent-cyan mr-2 mt-0.5 flex-shrink-0" />
+              <span>{point}</span>
             </li>
           ))}
         </ul>
-        {emphasis && <p className="text-sm text-accent-cyan font-medium mb-4">{emphasis}</p>}
         {to ? (
           <Link
             to={to}

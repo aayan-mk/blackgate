@@ -9,22 +9,29 @@ interface FeatureCardProps {
 
 export function FeatureCard({ number, title, description, image }: FeatureCardProps) {
   return (
-    <GlowCard className="h-full">
-      <div className="p-5">
-        <div className="flex items-start gap-4 mb-4">
-          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center">
-            <span className="text-xl font-bold text-gradient-cyan">{number}</span>
-          </div>
-          <div>
-            <h3 className="text-base font-semibold text-white mb-1">{title}</h3>
-            <p className="text-sm text-text-secondary">{description}</p>
-          </div>
+    <GlowCard className="h-full flex flex-col justify-between hover:border-accent-cyan/30 transition-all duration-300">
+      <div className="p-2.5 sm:p-3 flex flex-col h-full flex-grow">
+        {/* Badge */}
+        <div className="w-7 h-7 rounded bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center mb-2.5 flex-shrink-0">
+          <span className="text-xs font-bold text-accent-cyan">{number}</span>
         </div>
-        <div className="relative h-32 rounded-lg overflow-hidden">
+        
+        {/* Title & Description */}
+        <div className="mb-3.5 flex-grow">
+          <h3 className="text-xs sm:text-sm font-bold text-white mb-1 leading-tight tracking-tight">
+            {title}
+          </h3>
+          <p className="text-[10px] sm:text-[11px] text-text-secondary leading-normal tracking-wide">
+            {description}
+          </p>
+        </div>
+        
+        {/* Image with responsive aspect ratio */}
+        <div className="relative aspect-[16/10] rounded overflow-hidden mt-auto border border-border-subtle/40 flex-shrink-0">
           <img 
             src={image} 
             alt={title} 
-            className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       </div>

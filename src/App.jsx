@@ -6,7 +6,6 @@ import CoreStrengthsSection from './sections/CoreStrengthsSection';
 import WorldMapSection from './sections/WorldMapSection';
 import DifferenceSection from './sections/DifferenceSection';
 import UncompromiseSection from './sections/UncompromiseSection';
-import ContactSection from './sections/ContactSection';
 import Footer from './sections/Footer';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
         <WorldMapSection />
         <DifferenceSection />
         <UncompromiseSection />
-        <ContactSection />
       </main>
       <div className="relative z-10">
         <Footer />

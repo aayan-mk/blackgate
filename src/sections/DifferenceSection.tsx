@@ -3,6 +3,7 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import differenceEdgeImage from '@/assets/difference-edge.jpg';
 import differenceScaleImage from '@/assets/difference-scale.jpg';
 import differenceAiSecurityImage from '@/assets/difference-ai-security.jpg';
+import featureZeroTrustImage from '@/assets/feature-zero-trust.jpg';
 
 const differences = [
   {
@@ -23,11 +24,17 @@ const differences = [
     subtitle: 'Threat Detection',
     image: differenceAiSecurityImage,
   },
+  {
+    number: 4,
+    title: '24/7 Threat Intelligence',
+    subtitle: 'Threat Intelligence',
+    image: featureZeroTrustImage,
+  },
 ];
 
 export default function DifferenceSection() {
   return (
-    <section className="py-20 bg-transparent">
+    <section className="py-16 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
@@ -35,17 +42,17 @@ export default function DifferenceSection() {
             THE BLACKGATE DIFFERENCE
           </h2>
           <p className="text-text-secondary">
-            Re-imagined as a continuous advantage delivery
+            Five integrated advantages. One security advantage.
           </p>
         </ScrollReveal>
 
         {/* Difference Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {differences.map((diff, index) => (
             <DifferenceCard 
               key={diff.title} 
               {...diff} 
-              delay={index * 0.1}
+              delay={index * 0.08}
             />
           ))}
         </div>

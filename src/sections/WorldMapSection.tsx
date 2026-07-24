@@ -1,25 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { Radio, MapPin } from 'lucide-react';
+import { GlowCard } from '@/components/GlowCard';
 import worldMapImage from '@/assets/world-map.jpg';
-
-const stats = [
-  {
-    value: 99.9,
-    suffix: '%',
-    label: 'Platform Uptime',
-  },
-  {
-    value: 1000,
-    suffix: '+',
-    label: 'Active Deployments',
-  },
-  {
-    value: 100,
-    suffix: '+',
-    label: 'Global Regions',
-  },
-];
 
 const mapHotspots = [
   { id: 'us-west', left: 14.8, top: 37.4 },
@@ -41,114 +25,124 @@ export default function WorldMapSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="py-20 bg-bg-primary relative overflow-hidden">
+    <section className="py-12 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-            GLOBAL OPERATIONS
-          </h2>
-          <p className="text-text-secondary">
-            Regional coverage and infrastructure visibility
-          </p>
-        </ScrollReveal>
-
-        {/* World Map */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative rounded-xl overflow-hidden mb-8"
-        >
-          <img 
-            src={worldMapImage}
-            alt="Global Network" 
-            className="block w-full h-auto"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent" />
-          
-          {/* Pulsing Data Points */}
-          {mapHotspots.map((point, i) => (
-            <motion.div
-              key={point.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none"
-              style={{
-                left: `${point.left}%`,
-                top: `${point.top}%`,
-              }}
-            >
-              <motion.div
-                className="w-full h-full rounded-full bg-accent-cyan"
-                animate={
-                  shouldReduceMotion
-                    ? { scale: 1, opacity: 0.7 }
-                    : {
-                        scale: [1, 1.35, 1],
-                        opacity: [0.85, 0.45, 0.85],
-                      }
-                }
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: i * 0.2,
-                      }
-                }
-                style={{ willChange: 'transform, opacity' }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full border border-accent-cyan/40"
-                animate={
-                  shouldReduceMotion
-                    ? { scale: 1.15, opacity: 0.3 }
-                    : {
-                        scale: [1, 2],
-                        opacity: [0.55, 0],
-                      }
-                }
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0 }
-                    : {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'easeOut',
-                        delay: i * 0.2,
-                      }
-                }
-                style={{ willChange: 'transform, opacity' }}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center"
-            >
-              <div className="flex items-baseline justify-center gap-1 mb-2">
-                <AnimatedCounter
-                  end={stat.value}
-                  duration={2}
-                  suffix={stat.suffix}
-                  className="text-3xl sm:text-4xl font-bold text-white"
-                />
+        <ScrollReveal>
+          <div className="border border-border-subtle bg-[#080c14] rounded-2xl p-4 sm:p-5 md:p-6 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+              {/* World Map Side (Left 8 columns, transparent, no separate border) */}
+              <div className="lg:col-span-8 relative h-[200px] sm:h-[240px] lg:h-[280px] overflow-hidden rounded-lg">
+                <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+                  <div className="relative w-full aspect-[2] flex-shrink-0">
+                    <img 
+                      src={worldMapImage}
+                      alt="Global Network" 
+                      className="block w-full h-full object-cover"
+                    />
+                    
+                    {/* Pulsing Data Points */}
+                    {mapHotspots.map((point, i) => (
+                      <motion.div
+                        key={point.id}
+                        className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none"
+                        style={{
+                          left: `${point.left}%`,
+                          top: `${point.top}%`,
+                        }}
+                      >
+                        <motion.div
+                          className="w-full h-full rounded-full bg-accent-cyan"
+                          animate={
+                            shouldReduceMotion
+                              ? { scale: 1, opacity: 0.7 }
+                              : {
+                                  scale: [1, 1.35, 1],
+                                  opacity: [0.85, 0.45, 0.85],
+                                }
+                          }
+                          transition={
+                            shouldReduceMotion
+                              ? { duration: 0 }
+                              : {
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: 'easeInOut',
+                                  delay: i * 0.2,
+                                }
+                          }
+                          style={{ willChange: 'transform, opacity' }}
+                        />
+                        <motion.div
+                          className="absolute inset-0 rounded-full border border-accent-cyan/40"
+                          animate={
+                            shouldReduceMotion
+                              ? { scale: 1.15, opacity: 0.3 }
+                              : {
+                                  scale: [1, 2],
+                                  opacity: [0.55, 0],
+                                }
+                          }
+                          transition={
+                            shouldReduceMotion
+                              ? { duration: 0 }
+                              : {
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: 'easeOut',
+                                  delay: i * 0.2,
+                                }
+                          }
+                          style={{ willChange: 'transform, opacity' }}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <p className="text-text-secondary">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
+
+              {/* Sidebar Stats Panel (Right 4 columns, transparent, stacked inline) */}
+              <div className="lg:col-span-4 flex flex-col justify-center gap-8 pl-0 lg:pl-4">
+                {/* Stat 1 */}
+                <div className="flex items-center gap-5">
+                  <div className="w-12 h-12 rounded-xl bg-accent-cyan/5 border border-accent-cyan/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                    <Radio className="w-6 h-6 text-accent-cyan animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="flex items-baseline gap-1">
+                      <AnimatedCounter
+                        end={18.5}
+                        duration={2}
+                        suffix="%"
+                        className="text-3xl font-bold text-white tracking-tight"
+                      />
+                    </div>
+                    <p className="text-sm font-semibold text-white mt-0.5">Platform Uptime</p>
+                    <p className="text-xs text-accent-cyan font-medium mt-1">+1.3% vs last month</p>
+                  </div>
+                </div>
+
+                {/* Stat 2 */}
+                <div className="flex items-center gap-5">
+                  <div className="w-12 h-12 rounded-xl bg-accent-cyan/5 border border-accent-cyan/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                    <MapPin className="w-6 h-6 text-accent-cyan" />
+                  </div>
+                  <div>
+                    <div className="flex items-baseline gap-1">
+                      <AnimatedCounter
+                        end={185}
+                        duration={2}
+                        suffix="+"
+                        className="text-3xl font-bold text-white tracking-tight"
+                      />
+                    </div>
+                    <p className="text-sm font-semibold text-white mt-0.5">Active Deployments</p>
+                    <p className="text-xs text-accent-cyan font-medium mt-1">+24 vs last month</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

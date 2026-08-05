@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { Activity, Server, Globe } from 'lucide-react';
+import { Activity, Server, ShieldCheck } from 'lucide-react';
 import { GlowCard } from '@/components/GlowCard';
 
 const metrics = [
@@ -18,14 +18,14 @@ const metrics = [
     value: 10,
     suffix: '+',
     label: 'Build Website',
-    comparison: '+50 this year',
+    comparison: '+50 this year target',
   },
   {
-    icon: Globe,
-    value: 5,
+    icon: ShieldCheck,
+    value: 10,
     suffix: '+',
     label: 'Cybersecurity',
-    comparison: '+12 vs last month',
+    comparison: '+10 this year target',
   },
 ];
 
@@ -120,11 +120,11 @@ export default function MetricsSection() {
                   shouldReduceMotion
                     ? { duration: 0.35, delay: i * 0.01 }
                     : {
-                        duration: 2.2,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: i * 0.03,
-                      }
+                      duration: 2.2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: i * 0.03,
+                    }
                 }
                 style={{ willChange: 'transform' }}
               />

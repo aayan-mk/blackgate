@@ -16,11 +16,12 @@ const CaseStudies = lazy(() => import('./pages/CaseStudies.jsx'))
 const Privacy = lazy(() => import('./pages/Privacy.jsx'))
 const Terms = lazy(() => import('./pages/Terms.jsx'))
 const SecurityPage = lazy(() => import('./pages/SecurityPage.jsx'))
-const Product = lazy(() => import('./pages/Product.jsx'))
-const Feature = lazy(() => import('./pages/Feature.jsx'))
-const Resources = lazy(() => import('./pages/Resources.jsx'))
-const Login = lazy(() => import('./pages/Login.jsx'))
-const SignUp = lazy(() => import('./pages/SignUp.jsx'))
+const Product = lazy(() => import('./pages/Product.tsx'))
+const Feature = lazy(() => import('./pages/Features.tsx'))
+const Resources = lazy(() => import('./pages/Resources.tsx'))
+const Contact = lazy(() => import('./pages/Contact.tsx'))
+const Login = lazy(() => import('./pages/Login.tsx'))
+const SignUp = lazy(() => import('./pages/SignUp.tsx'))
 
 document.title = 'Blackgate'
 
@@ -59,6 +60,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/features" element={<Feature />} />
           <Route path="/feature" element={<Feature />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>

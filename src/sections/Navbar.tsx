@@ -10,6 +10,8 @@ const navLinks = [
   { label: 'Product', to: '/product' },
   { label: 'Features', to: '/features' },
   { label: 'Resources', to: '/resources' },
+  { label: 'Case Studies', to: '/case-studies' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 export default function Navbar() {
@@ -72,15 +74,9 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/login"
-              className="text-sm text-text-secondary hover:text-white transition-colors"
+              className="px-5 py-2 text-sm font-medium text-bg-primary bg-accent-cyan rounded-full hover:bg-accent-teal transition-colors"
             >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="px-4 py-2 text-sm font-medium text-bg-primary bg-accent-cyan rounded-full hover:bg-accent-teal transition-colors"
-            >
-              Sign Up
+              Log In / Sign Up
             </Link>
           </div>
 
@@ -122,16 +118,9 @@ export default function Navbar() {
               <NavLink
                 to="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-text-secondary hover:text-white"
-              >
-                Login
-              </NavLink>
-              <NavLink
-                to="/signup"
-                onClick={() => setMobileMenuOpen(false)}
                 className="px-4 py-2 text-center text-bg-primary bg-accent-cyan rounded-full hover:bg-accent-teal transition-colors"
               >
-                Sign Up
+                Log In / Sign Up
               </NavLink>
             </div>
           </div>

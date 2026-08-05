@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, CheckCircle2, AlertCircle, Target, Lightbulb } from 'lucide-react'
-import './ServicePages.css'
+import { ArrowRight, CheckCircle2, AlertCircle, Target, Lightbulb, Star } from 'lucide-react'
+import Navbar from '../sections/Navbar'
+import Footer from '../sections/Footer'
+import AnimatedSection from '../components/AnimatedSection'
 
 function CaseStudies() {
   useEffect(() => {
@@ -76,144 +78,116 @@ function CaseStudies() {
   ]
 
   return (
-    <div className="service-page">
-      {/* Hero Section */}
-      <section className="service-hero case-studies-hero">
-        <div className="container">
-          <Link to="/" className="back-button">
-            ← Back to Home
-          </Link>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1>Case Studies & Experience</h1>
-            <p className="service-hero-subtitle">
+    <div className="relative min-h-screen overflow-hidden bg-bg-primary cyber-grid pt-24">
+      <Navbar />
+      
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 mb-20">
+        
+        {/* Hero Section */}
+        <AnimatedSection>
+          <div className="text-center mb-24 max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Case Studies & Experience</h1>
+            <p className="text-xl text-text-secondary leading-relaxed">
               Real-world experience in high-stakes environments. These aren't hypotheticals—they're 
               the foundations of how we think, build, and secure systems.
             </p>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </AnimatedSection>
 
-      {/* Case Studies */}
-      <section className="service-section">
-        <div className="container">
+        {/* Case Studies */}
+        <div className="space-y-16 mb-32">
           {caseStudies.map((study, index) => (
-            <motion.div
-              key={index}
-              className="case-study-card"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-            >
-              <div className="case-study-header">
-                <h2>{study.title}</h2>
-                <p className="case-study-context">{study.context}</p>
-              </div>
+            <AnimatedSection key={index} delay={index * 0.1}>
+              <div className="p-8 md:p-12 rounded-3xl bg-bg-card gradient-border">
+                <div className="mb-10 border-b border-white/10 pb-8">
+                  <h2 className="text-3xl font-bold text-white mb-3">{study.title}</h2>
+                  <p className="text-cyan-primary font-semibold text-lg">{study.context}</p>
+                </div>
 
-              <div className="case-study-section">
-                <h3><Target size={20} /> Background</h3>
-                <p>{study.background}</p>
-              </div>
-
-              <div className="case-study-section">
-                <h3><AlertCircle size={20} /> Challenge</h3>
-                <p>{study.challenge}</p>
-              </div>
-
-              <div className="case-study-section">
-                <h3><CheckCircle2 size={20} /> Approach</h3>
-                <p>{study.approach}</p>
-              </div>
-
-              <div className="case-study-section">
-                <h3><Lightbulb size={20} /> Key Learnings</h3>
-                <div className="learnings-grid">
-                  {study.learnings.map((learning, i) => (
-                    <div key={i} className="learning-card">
-                      <h4>{learning.insight}</h4>
-                      <p>{learning.detail}</p>
+                <div className="grid md:grid-cols-2 gap-12">
+                  <div className="space-y-10">
+                    <div>
+                      <h3 className="flex items-center gap-3 text-xl font-bold text-white mb-4">
+                        <Target className="text-cyan-primary" /> Background
+                      </h3>
+                      <p className="text-text-secondary leading-relaxed">{study.background}</p>
                     </div>
-                  ))}
+
+                    <div>
+                      <h3 className="flex items-center gap-3 text-xl font-bold text-white mb-4">
+                        <AlertCircle className="text-cyan-primary" /> Challenge
+                      </h3>
+                      <p className="text-text-secondary leading-relaxed">{study.challenge}</p>
+                    </div>
+
+                    <div>
+                      <h3 className="flex items-center gap-3 text-xl font-bold text-white mb-4">
+                        <CheckCircle2 className="text-cyan-primary" /> Approach
+                      </h3>
+                      <p className="text-text-secondary leading-relaxed">{study.approach}</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-10">
+                    <div>
+                      <h3 className="flex items-center gap-3 text-xl font-bold text-white mb-6">
+                        <Lightbulb className="text-cyan-primary" /> Key Learnings
+                      </h3>
+                      <div className="grid gap-4">
+                        {study.learnings.map((learning, i) => (
+                          <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                            <h4 className="text-white font-semibold mb-2">{learning.insight}</h4>
+                            <p className="text-sm text-text-secondary leading-relaxed">{learning.detail}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="p-6 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20">
+                      <h4 className="text-lg font-bold text-white mb-2">Outcome</h4>
+                      <p className="text-text-secondary leading-relaxed">{study.outcome}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="case-study-outcome">
-                <h4>Outcome</h4>
-                <p>{study.outcome}</p>
-              </div>
-            </motion.div>
+            </AnimatedSection>
           ))}
         </div>
-      </section>
 
-      {/* Testimonials */}
-      <section className="service-section dark-bg">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
-          >
-            <h2>What Others Say</h2>
-            <p className="section-subtitle">
-              Validation from those who've worked with us in real environments.
-            </p>
-          </motion.div>
+        {/* Testimonials */}
+        <div className="mb-32">
+          <AnimatedSection delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-4">What Others Say</h2>
+              <p className="text-text-secondary text-lg">
+                Validation from those who've worked with us in real environments.
+              </p>
+            </div>
 
-          <div className="testimonials-grid">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="testimonial-card"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-              >
-                <div className="testimonial-rating">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i}>★</span>
-                  ))}
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="p-8 rounded-3xl bg-bg-card border border-white/10 flex flex-col justify-between">
+                  <div>
+                    <div className="flex gap-1 mb-6 text-yellow-400">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} size={20} fill="currentColor" />
+                      ))}
+                    </div>
+                    <p className="text-text-secondary italic leading-relaxed mb-8">"{testimonial.quote}"</p>
+                  </div>
+                  <div className="pt-6 border-t border-white/10">
+                    <div className="font-bold text-white mb-1">{testimonial.author}</div>
+                    <div className="text-sm text-cyan-primary">{testimonial.role}</div>
+                  </div>
                 </div>
-                <p className="testimonial-quote">"{testimonial.quote}"</p>
-                <div className="testimonial-author">
-                  <strong>{testimonial.author}</strong>
-                  <span>{testimonial.role}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
-      </section>
 
-      {/* CTA */}
-      <section className="service-cta-section">
-        <div className="container">
-          <motion.div
-            className="service-cta-content"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2>Ready to Add Your Success Story?</h2>
-            <p>
-              Let's discuss how Blackgate's experience can help solve your unique challenges.
-            </p>
-            <Link to="/#contact" className="cta-button">
-              Start a Conversation
-              <ArrowRight size={20} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      </div>
+      
+      <Footer />
     </div>
   )
 }

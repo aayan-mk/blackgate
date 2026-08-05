@@ -15,16 +15,16 @@ const metrics = [
   },
   {
     icon: Server,
-    value: 1000,
+    value: 10,
     suffix: '+',
-    label: 'Managed Servers',
-    comparison: '+180 vs last month',
+    label: 'Build Website',
+    comparison: '+50 this year',
   },
   {
     icon: Globe,
-    value: 100,
+    value: 5,
     suffix: '+',
-    label: 'Global Regions',
+    label: 'Cybersecurity',
     comparison: '+12 vs last month',
   },
 ];

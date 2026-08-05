@@ -3,9 +3,11 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { 
   Shield, Lock, Code, Terminal, Brain, ArrowRight, 
-  CheckCircle2, Zap, Server, Database, Cloud, Cpu
+  CheckCircle2, Zap, Server, Database, Cloud
 } from 'lucide-react'
-import './ServicePages.css'
+import Navbar from '../sections/Navbar'
+import Footer from '../sections/Footer'
+import AnimatedSection from '../components/AnimatedSection'
 
 function About() {
   useEffect(() => {
@@ -100,213 +102,141 @@ function About() {
   ]
 
   return (
-    <div className="service-page">
-      {/* Hero Section */}
-      <section className="service-hero about-hero">
-        <div className="container">
-          <Link to="/" className="back-button">
-            ← Back to Home
-          </Link>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1>About Blackgate</h1>
-            <p className="service-hero-subtitle">
+    <div className="relative min-h-screen overflow-hidden bg-bg-primary cyber-grid pt-24">
+      <Navbar />
+      
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 mb-20">
+        
+        {/* Hero Section */}
+        <AnimatedSection>
+          <div className="text-center mb-24 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">About Blackgate</h1>
+            <p className="text-xl text-text-secondary leading-relaxed">
               We're not a quick-service agency churning out templates. We're a long-term technology 
               partner invested in your success, built on security, intelligence, and uncompromising standards.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Founding Team */}
-      <section className="service-section">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
-          >
-            <h2>Meet the Founding Team</h2>
-            <p className="section-subtitle">
-              Four experts. One mission: Build secure, reliable, intelligent systems.
-            </p>
-          </motion.div>
-
-          <div className="team-grid">
-            {foundingTeam.map((member, index) => (
-              <motion.div
-                key={index}
-                className="team-card"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-              >
-                <div className="team-icon-wrapper">
-                  {member.icon}
-                </div>
-                <h3>{member.name}</h3>
-                <p className="team-role">{member.role}</p>
-                <p className="team-bio">{member.bio}</p>
-              </motion.div>
-            ))}
           </div>
+        </AnimatedSection>
+
+        {/* Founding Team */}
+        <div className="mb-32">
+          <AnimatedSection delay={0.1}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-4">Meet the Founding Team</h2>
+              <p className="text-text-secondary text-lg">Four experts. One mission: Build secure, reliable, intelligent systems.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {foundingTeam.map((member, index) => (
+                <div key={index} className="p-8 rounded-3xl bg-bg-card gradient-border flex flex-col items-center text-center">
+                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-primary/10 text-cyan-primary mb-6 glow-cyan border border-cyan-primary/20">
+                    {member.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
+                  <p className="text-cyan-primary text-sm font-semibold mb-4">{member.role}</p>
+                  <p className="text-text-secondary text-sm">{member.bio}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
-      </section>
 
-      {/* How We Work */}
-      <section className="service-section dark-bg">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
-          >
-            <h2>How We Work</h2>
-            <p className="section-subtitle">
-              Our process isn't rushed. It's methodical, secure, and designed for long-term success.
-            </p>
-          </motion.div>
+        {/* How We Work */}
+        <div className="mb-32">
+          <AnimatedSection delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-4">How We Work</h2>
+              <p className="text-text-secondary text-lg">Our process isn't rushed. It's methodical, secure, and designed for long-term success.</p>
+            </div>
 
-          <div className="process-timeline">
-            {workflow.map((phase, index) => (
-              <motion.div
-                key={index}
-                className="process-step"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-              >
-                <div className="step-number">{phase.step}</div>
-                <div className="step-content">
-                  <h3>{phase.title}</h3>
-                  <p>{phase.desc}</p>
-                  <ul className="step-activities">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {workflow.map((phase, index) => (
+                <div key={index} className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-cyan-primary/30 transition-colors">
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-3xl font-bold text-white/20">{phase.step}</span>
+                    <h3 className="text-2xl font-bold text-white">{phase.title}</h3>
+                  </div>
+                  <p className="text-text-secondary mb-6">{phase.desc}</p>
+                  <ul className="space-y-3">
                     {phase.activities.map((activity, i) => (
-                      <li key={i}>
-                        <CheckCircle2 size={16} />
-                        <span>{activity}</span>
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" />
+                        <span className="text-sm text-text-secondary">{activity}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
-      </section>
 
-      {/* Tech Stack */}
-      <section className="service-section">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
-          >
-            <h2>Technology Stack</h2>
-            <p className="section-subtitle">
-              We use proven, production-grade technologies. No experiments on your infrastructure.
-            </p>
-          </motion.div>
+        {/* Tech Stack */}
+        <div className="mb-32">
+          <AnimatedSection delay={0.3}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-4">Technology Stack</h2>
+              <p className="text-text-secondary text-lg">We use proven, production-grade technologies. No experiments on your infrastructure.</p>
+            </div>
 
-          <div className="tech-stack-grid">
-            {techStack.map((stack, index) => (
-              <motion.div
-                key={index}
-                className="tech-stack-card"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <div className="tech-icon-wrapper">
-                  {stack.icon}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {techStack.map((stack, index) => (
+                <div key={index} className="p-6 rounded-2xl bg-bg-card border border-white/5">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="text-cyan-primary p-2 bg-cyan-primary/10 rounded-lg">
+                      {stack.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-white">{stack.category}</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {stack.technologies.map((tech, i) => (
+                      <span key={i} className="px-3 py-1 text-xs font-medium bg-white/5 text-text-secondary rounded-full border border-white/10">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3>{stack.category}</h3>
-                <div className="tech-list">
-                  {stack.technologies.map((tech, i) => (
-                    <span key={i} className="tech-badge">{tech}</span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
-      </section>
 
-      {/* Partnership Philosophy */}
-      <section className="service-section dark-bg">
-        <div className="container">
-          <motion.div
-            className="partnership-philosophy"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2>A Partner, Not a Vendor</h2>
-            <p className="philosophy-intro">
-              We're not a quick-service agency churning out templates. We're a 
-              <strong> long-term technology partner</strong> invested in your success.
-            </p>
-            <p>
-              We embed with your team. We understand your domain. We architect for the next decade, 
-              not just the next quarter. When you work with Blackgate, you're not buying a project—you're 
-              building a relationship founded on trust, transparency, and technical excellence.
-            </p>
-            <div className="partnership-benefits">
-              <div className="benefit-item">
-                <Zap size={32} />
-                <div>
-                  <h4>Multi-Year Engagements</h4>
-                  <p>We grow with you, not away from you</p>
+        {/* Partnership Philosophy */}
+        <AnimatedSection delay={0.4}>
+          <div className="p-10 md:p-16 rounded-3xl bg-bg-card gradient-border flex flex-col md:flex-row gap-12 items-center">
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold text-white mb-6">A Partner, Not a Vendor</h2>
+              <p className="text-xl text-cyan-primary font-semibold mb-6">
+                We're not a quick-service agency churning out templates. We're a long-term technology partner invested in your success.
+              </p>
+              <p className="text-text-secondary leading-relaxed mb-8">
+                We embed with your team. We understand your domain. We architect for the next decade, 
+                not just the next quarter. When you work with Blackgate, you're not buying a project—you're 
+                building a relationship founded on trust, transparency, and technical excellence.
+              </p>
+              
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="flex items-start gap-4">
+                  <Zap size={24} className="text-cyan-primary mt-1" />
+                  <div>
+                    <h4 className="text-white font-bold mb-1">Multi-Year Engagements</h4>
+                    <p className="text-sm text-text-muted">We grow with you, not away from you</p>
+                  </div>
                 </div>
-              </div>
-              <div className="benefit-item">
-                <CheckCircle2 size={32} />
-                <div>
-                  <h4>Strategic Advisory</h4>
-                  <p>Technology decisions that compound over time</p>
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 size={24} className="text-cyan-primary mt-1" />
+                  <div>
+                    <h4 className="text-white font-bold mb-1">Strategic Advisory</h4>
+                    <p className="text-sm text-text-muted">Technology decisions that compound over time</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </AnimatedSection>
 
-      {/* CTA */}
-      <section className="service-cta-section">
-        <div className="container">
-          <motion.div
-            className="service-cta-content"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2>Ready to Work Together?</h2>
-            <p>
-              Let's discuss how Blackgate can help secure, scale, and future-proof your business.
-            </p>
-            <Link to="/#contact" className="cta-button">
-              Get in Touch
-              <ArrowRight size={20} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      </div>
+      <Footer />
     </div>
   )
 }

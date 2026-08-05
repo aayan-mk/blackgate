@@ -2,10 +2,31 @@ import { Link } from 'react-router-dom';
 import whiteLogoImage from '@/assets/white-logo.png';
 
 const footerLinks = {
-  Company: ['About', 'Careers', 'Press', 'Contact'],
-  Product: ['Features', 'Pricing', 'Security', 'Integrations'],
-  Features: ['Cloud Native', 'AI Security', 'Zero Trust', 'Compliance'],
-  Resources: ['Documentation', 'API Reference', 'Blog', 'Support'],
+  Company: [
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+    { name: 'Privacy Policy', path: '/privacy' },
+    { name: 'Terms of Service', path: '/terms' },
+  ],
+  Product: [
+    { name: 'Features', path: '/features' },
+    { name: 'Pricing', path: '#' },
+    { name: 'Security', path: '/security' },
+    { name: 'Integrations', path: '#' },
+  ],
+  Features: [
+    { name: 'Cloud Native', path: '#' },
+    { name: 'AI Security', path: '#' },
+    { name: 'Zero Trust', path: '#' },
+    { name: 'Compliance', path: '#' },
+  ],
+  Resources: [
+    { name: 'Documentation', path: '#' },
+    { name: 'API Reference', path: '#' },
+    { name: 'Case Studies', path: '/case-studies' },
+    { name: 'Blog', path: '#' },
+    { name: 'Support', path: '#' },
+  ],
 };
 
 export default function Footer() {
@@ -36,13 +57,22 @@ export default function Footer() {
               <h4 className="text-sm font-semibold text-white mb-4">{category}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-text-secondary hover:text-accent-cyan transition-colors"
-                    >
-                      {link}
-                    </a>
+                  <li key={link.name}>
+                    {link.path !== '#' ? (
+                      <Link
+                        to={link.path}
+                        className="text-sm text-text-secondary hover:text-accent-cyan transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.path}
+                        className="text-sm text-text-secondary hover:text-accent-cyan transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -56,12 +86,12 @@ export default function Footer() {
             © 2024 Blackgate. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-sm text-text-muted hover:text-accent-cyan transition-colors">
+            <Link to="/privacy" className="text-sm text-text-muted hover:text-accent-cyan transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-text-muted hover:text-accent-cyan transition-colors">
+            </Link>
+            <Link to="/terms" className="text-sm text-text-muted hover:text-accent-cyan transition-colors">
               Terms of Service
-            </a>
+            </Link>
             <a href="#" className="text-sm text-text-muted hover:text-accent-cyan transition-colors">
               Cookie Policy
             </a>

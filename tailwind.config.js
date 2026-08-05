@@ -52,6 +52,7 @@ module.exports = {
         'bg-secondary': '#0d1320',
         'bg-card': '#111827',
         'bg-card-hover': '#1a2332',
+        'cyan-primary': '#06b6d4',
         'accent-cyan': '#06b6d4',
         'accent-teal': '#14b8a6',
         'accent-blue': '#3b82f6',

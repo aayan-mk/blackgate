@@ -17,10 +17,10 @@ function ServiceQuickNav() {
           to={item.to}
           className={({ isActive }) =>
             cn(
-              'border rounded-full px-4 py-3 text-sm text-center transition-all duration-300',
+              'border rounded-full px-4 py-3 text-sm font-semibold tracking-wide text-center transition-all duration-300 backdrop-blur-md',
               isActive
-                ? 'border-accent-cyan bg-gradient-to-br from-accent-cyan/20 to-accent-cyan/5 text-white shadow-[0_4px_20px_rgba(0,212,255,0.15)]'
-                : 'border-accent-cyan/20 bg-bg-card/60 text-text-secondary hover:border-accent-cyan/50 hover:bg-accent-cyan/10 hover:text-white'
+                ? 'border-cyan-primary bg-cyan-primary/20 text-white shadow-[0_0_25px_rgba(0,212,255,0.4)] drop-shadow-md'
+                : 'border-white/10 bg-black/40 text-text-secondary hover:border-cyan-primary/50 hover:bg-cyan-primary/10 hover:text-white hover:shadow-[0_0_15px_rgba(0,212,255,0.2)]'
             )
           }
         >

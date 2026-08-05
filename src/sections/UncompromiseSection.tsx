@@ -55,9 +55,9 @@ export default function UncompromiseSection() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Features columns (Left, approx 67%, 8 cols) */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+        <div className="flex flex-col gap-12">
+          {/* Features row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -72,8 +72,8 @@ export default function UncompromiseSection() {
             ))}
           </div>
 
-          {/* Contact Form Column (Right, approx 33%, 4 cols) */}
-          <div className="lg:col-span-4 w-full">
+          {/* Contact Form Column (Below) */}
+          <div className="w-full max-w-5xl mx-auto">
             <ContactSection />
           </div>
         </div>

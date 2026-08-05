@@ -12,13 +12,9 @@ export function GlowCard({ children, className, ...props }: GlowCardProps) {
     <motion.div
       {...props}
       className={cn(
-        'group relative bg-black border border-border-subtle rounded-lg overflow-hidden',
-        'transition-colors duration-300',
-        'hover:border-white hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]',
+        'group rounded-2xl bg-bg-card p-5 gradient-border hover:bg-bg-card-hover transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden',
         className
       )}
-      whileHover={{ y: -8, ...((props.whileHover as object) || {}) }}
-      transition={{ type: 'spring', stiffness: 300, ...((props.transition as object) || {}) }}
     >
       {children}
     </motion.div>

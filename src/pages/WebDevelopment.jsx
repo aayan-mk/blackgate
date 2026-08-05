@@ -5,40 +5,69 @@ import { useEffect } from 'react'
 import ServiceQuickNav from '../components/ServiceQuickNav'
 import Navbar from '@/sections/Navbar'
 import Footer from '@/sections/Footer'
-import { GlowCard } from '@/components/GlowCard'
+import { GlowCard } from '../components/GlowCard'
 
 function WebDevelopment() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="relative min-h-screen overflow-hidden bg-bg-primary cyber-grid">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 border-b border-accent-cyan/10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
+      <section className="relative mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-8">
+        {/* Glowing background blob */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-primary/20 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Text Content (Left Side) */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center text-center"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-start text-left"
           >
-            <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-accent-cyan/10 to-accent-cyan/5 border-2 border-accent-cyan/30 rounded-2xl flex items-center justify-center mb-8 text-accent-cyan">
-              <Code size={48} className="sm:w-16 sm:h-16" />
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Web <span className="text-gradient-cyan">Development</span>
+            {/* Service Badge */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-primary/10 border border-cyan-primary/20 mb-6 backdrop-blur-md"
+            >
+              <span className="w-2 h-2 rounded-full bg-cyan-primary animate-pulse shadow-[0_0_10px_rgba(0,212,255,1)]" />
+              <span className="text-xs font-bold tracking-widest text-cyan-primary uppercase">Service</span>
+            </motion.div>
+
+            {/* Heading */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight drop-shadow-2xl">
+              Web <span className="gradient-text drop-shadow-[0_0_30px_rgba(0,212,255,0.3)]">Development</span>
             </h1>
-            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
-              Modern, secure, and lightning-fast web applications built with precision engineering.
+            
+            <p className="text-lg sm:text-xl md:text-2xl text-text-secondary max-w-2xl leading-relaxed">
+              We build high-performance, secure, and scalable web applications that drive your business forward.
             </p>
+          </motion.div>
+
+          {/* Logo / Icon (Right Side) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="flex justify-center lg:justify-end"
+          >
+            {/* High-fi Icon Wrapper */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-cyan-primary/30 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="relative inline-flex items-center justify-center p-12 sm:p-16 rounded-[3rem] bg-black/50 backdrop-blur-xl border border-cyan-primary/40 shadow-[inset_0_0_30px_rgba(0,212,255,0.2)] group-hover:shadow-[inset_0_0_50px_rgba(0,212,255,0.4),0_0_60px_rgba(0,212,255,0.3)] transition-all duration-700 text-cyan-primary">
+                <Code size={100} className="sm:w-32 sm:h-32 drop-shadow-[0_0_20px_rgba(0,212,255,0.8)]" />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-6 border-b border-border-subtle">
+      <section className="py-6 border-b border-border-subtle relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ServiceQuickNav />
         </div>
@@ -68,7 +97,7 @@ function WebDevelopment() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="p-8"
             >
-              <Globe className="w-12 h-12 text-accent-cyan mb-6" />
+              <Globe className="w-12 h-12 text-cyan-primary mb-6" />
               <h3 className="text-xl font-semibold text-white mb-3">Progressive Web Apps</h3>
               <p className="text-text-secondary leading-relaxed">
                 Fast, reliable, and engaging experiences that work seamlessly across all devices. 
@@ -83,7 +112,7 @@ function WebDevelopment() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="p-8"
             >
-              <Smartphone className="w-12 h-12 text-accent-cyan mb-6" />
+              <Smartphone className="w-12 h-12 text-cyan-primary mb-6" />
               <h3 className="text-xl font-semibold text-white mb-3">Responsive Design</h3>
               <p className="text-text-secondary leading-relaxed">
                 Pixel-perfect interfaces that adapt beautifully to any screen size. Mobile-first 
@@ -98,7 +127,7 @@ function WebDevelopment() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="p-8"
             >
-              <Server className="w-12 h-12 text-accent-cyan mb-6" />
+              <Server className="w-12 h-12 text-cyan-primary mb-6" />
               <h3 className="text-xl font-semibold text-white mb-3">API Development</h3>
               <p className="text-text-secondary leading-relaxed">
                 RESTful and GraphQL APIs built for performance and scalability. Clean documentation, 
@@ -113,7 +142,7 @@ function WebDevelopment() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="p-8"
             >
-              <Zap className="w-12 h-12 text-accent-cyan mb-6" />
+              <Zap className="w-12 h-12 text-cyan-primary mb-6" />
               <h3 className="text-xl font-semibold text-white mb-3">Performance Optimization</h3>
               <p className="text-text-secondary leading-relaxed">
                 Sub-second load times through code splitting, lazy loading, CDN delivery, and 
@@ -128,7 +157,7 @@ function WebDevelopment() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="p-8"
             >
-              <Shield className="w-12 h-12 text-accent-cyan mb-6" />
+              <Shield className="w-12 h-12 text-cyan-primary mb-6" />
               <h3 className="text-xl font-semibold text-white mb-3">Security First</h3>
               <p className="text-text-secondary leading-relaxed">
                 HTTPS everywhere, CSP headers, XSS protection, CSRF tokens, and secure authentication. 
@@ -143,7 +172,7 @@ function WebDevelopment() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="p-8"
             >
-              <Code className="w-12 h-12 text-accent-cyan mb-6" />
+              <Code className="w-12 h-12 text-cyan-primary mb-6" />
               <h3 className="text-xl font-semibold text-white mb-3">Clean Architecture</h3>
               <p className="text-text-secondary leading-relaxed">
                 Maintainable, testable code with comprehensive documentation. Future developers 
@@ -319,28 +348,6 @@ function WebDevelopment() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-accent-cyan/[0.02] border-y border-accent-cyan/10 pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            className="text-center bg-black border border-border-subtle hover:border-white hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300 rounded-2xl p-10 sm:p-16 max-w-4xl mx-auto backdrop-blur-sm"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Build Something Exceptional?</h2>
-            <p className="text-lg text-text-secondary mb-10 max-w-2xl mx-auto">
-              Let's discuss your project requirements and create a development roadmap tailored to your goals.
-            </p>
-            <Link to="/#contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent-cyan text-bg-primary font-bold rounded-full hover:bg-accent-teal hover:scale-105 transition-all shadow-[0_0_20px_rgba(6, 182, 212,0.3)]">
-              Start Your Project
-              <Code size={20} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
 
       <Footer />
     </div>

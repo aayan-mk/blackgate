@@ -8,41 +8,41 @@ import { cn } from '@/lib/utils';
 const testimonials = [
   {
     quote:
-      'Blackgate transformed our entire security posture. Their zero-trust implementation reduced our attack surface by 85% within the first quarter.',
-    author: 'Rahul Sharma',
-    role: 'CTO, FinSecure Labs',
+      'As an early pilot partner, working with Blackgate was refreshing. Their engineers gave us direct, hands-on attention, auditing our web application and securing our endpoints before launch.',
+    author: 'Early Pilot Partner',
+    role: 'SaaS Beta Cohort',
     accent: 'from-accent-cyan/20 to-accent-teal/20',
     borderAccent: 'border-accent-cyan/30',
   },
   {
     quote:
-      'The AI-driven threat detection caught anomalies our previous system missed entirely. Their team operates with military-grade precision.',
-    author: 'Priya Deshmukh',
-    role: 'VP Engineering, CloudScale',
+      'During technical evaluation, the team demonstrated remarkable discipline. They approached system architecture with a security-first mindset, focusing on zero-trust access and clean code.',
+    author: 'Academic & Technical Mentor',
+    role: 'Computer Systems Research Advisor',
     accent: 'from-emerald-500/20 to-cyan-500/20',
     borderAccent: 'border-emerald-500/30',
   },
   {
     quote:
-      'From penetration testing to compliance — Blackgate delivered a comprehensive security audit that helped us achieve SOC 2 certification in record time.',
-    author: 'Ankit Mehta',
-    role: 'Founder, DataVault',
+      'Blackgate helped us review our API authentication and set up safe cloud defaults from Day 1. Getting direct access to the actual developers building our stack made a huge difference.',
+    author: 'Early Stage Creator',
+    role: 'Pre-Seed Founder',
     accent: 'from-blue-500/20 to-purple-500/20',
     borderAccent: 'border-blue-500/30',
   },
   {
     quote:
-      'Their web development team built us a high-performance platform that handles 10x our previous traffic with enterprise-grade security baked in.',
-    author: 'Sara Patel',
-    role: 'Product Lead, NexGen',
+      'We built Blackgate on a simple principle: quality over vanity numbers. If code is not tested, secure, and well-documented, it simply does not ship. We treat every early project with extreme care.',
+    author: 'Blackgate Founding Team',
+    role: 'Engineering & Architecture Standard',
     accent: 'from-amber-500/20 to-orange-500/20',
     borderAccent: 'border-amber-500/30',
   },
   {
     quote:
-      'Outstanding incident response. When we faced a potential breach, Blackgate had it contained and analyzed within 2 hours. Truly world-class.',
-    author: 'Vikram Joshi',
-    role: 'CISO, MediShield',
+      'Their pragmatic approach to AI automation and secure web foundations helped us cut through industry hype and implement practical tools that actually save our team time.',
+    author: 'Design & Tech Collaborator',
+    role: 'Early Adopter Network',
     accent: 'from-rose-500/20 to-pink-500/20',
     borderAccent: 'border-rose-500/30',
   },
@@ -99,114 +99,123 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <SectionBadge text="Client Reviews" />
+          <SectionBadge text="Early Collaborations" />
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-            Trusted by Leaders
+            EARLY FEEDBACK &amp; STANDARDS
           </h2>
-          <p className="text-text-secondary max-w-lg mx-auto">
-            What our clients say about working with Blackgate.
+          <p className="text-text-secondary max-w-md mx-auto">
+            Grounded perspectives from our early pilot partners, advisors, and core engineering philosophy.
           </p>
         </ScrollReveal>
 
         {/* Carousel */}
         <div className="relative group">
-          {/* Nav Buttons */}
+          {/* Nav buttons */}
           <button
+            type="button"
             onClick={() => scrollToIndex(activeIndex - 1)}
             disabled={activeIndex === 0}
             aria-label="Previous testimonial"
             className={cn(
-              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
-              activeIndex > 0
-                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
-                : 'border-white/10 text-white/30 cursor-not-allowed'
+              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-sm border flex items-center justify-center transition-all shadow-lg',
+              activeIndex === 0
+                ? 'border-white/10 text-white/30 cursor-not-allowed'
+                : 'border-white/20 text-white/70 hover:text-white hover:border-accent-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-110'
             )}
           >
             <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
           </button>
           <button
+            type="button"
             onClick={() => scrollToIndex(activeIndex + 1)}
             disabled={activeIndex === testimonials.length - 1}
             aria-label="Next testimonial"
             className={cn(
-              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
-              activeIndex < testimonials.length - 1
-                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
-                : 'border-white/10 text-white/30 cursor-not-allowed'
+              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-sm border flex items-center justify-center transition-all shadow-lg',
+              activeIndex === testimonials.length - 1
+                ? 'border-white/10 text-white/30 cursor-not-allowed'
+                : 'border-white/20 text-white/70 hover:text-white hover:border-accent-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-110'
             )}
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
-          {/* Cards */}
+          {/* Cards container */}
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory py-4 items-stretch"
+            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory py-8 items-stretch"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {testimonials.map((t, i) => (
+            {testimonials.map((t, index) => (
               <motion.div
                 key={t.author}
-                ref={(node) => { cardRefs.current[i] = node; }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="snap-center shrink-0 w-[320px] sm:w-[380px] md:w-[420px]"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                className="snap-center shrink-0 w-[300px] sm:w-[380px] md:w-[420px] flex flex-col justify-between rounded-2xl bg-bg-surface/50 border border-border-subtle p-6 sm:p-8 backdrop-blur-sm relative group/card hover:border-accent-cyan/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]"
               >
+                {/* Top glow */}
                 <div
                   className={cn(
-                    'relative h-full p-6 sm:p-8 rounded-2xl bg-black border transition-all duration-500 group/card hover:shadow-[0_0_30px_rgba(6,182,212,0.1)] flex flex-col',
-                    t.borderAccent,
-                    activeIndex === i ? 'border-opacity-100 scale-[1.02]' : 'border-opacity-50'
+                    'absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r opacity-0 group-hover/card:opacity-100 transition-opacity duration-300',
+                    t.accent
                   )}
-                >
-                  {/* Gradient overlay */}
-                  <div
-                    className={cn(
-                      'absolute inset-0 rounded-2xl bg-gradient-to-br opacity-30 pointer-events-none',
-                      t.accent
-                    )}
-                  />
+                />
 
-                  {/* Quote icon */}
-                  <Quote className="w-8 h-8 text-accent-cyan/30 mb-4 flex-shrink-0 relative" />
-
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4 relative">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-accent-cyan text-accent-cyan" />
-                    ))}
+                <div>
+                  {/* Quote icon & stars */}
+                  <div className="flex items-center justify-between mb-4">
+                    <Quote className="w-8 h-8 text-accent-cyan/40" />
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-amber-400 text-amber-400"
+                        />
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Quote */}
-                  <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-6 flex-grow relative">
-                    "{t.quote}"
+                  {/* Quote text */}
+                  <p className="text-text-secondary text-sm sm:text-base leading-relaxed mb-6">
+                    &ldquo;{t.quote}&rdquo;
                   </p>
+                </div>
 
-                  {/* Author */}
-                  <div className="relative">
-                    <p className="text-sm font-semibold text-white">{t.author}</p>
-                    <p className="text-xs text-text-secondary">{t.role}</p>
+                {/* Author info */}
+                <div className="border-t border-border-subtle/60 pt-4 flex items-center justify-between">
+                  <div>
+                    <h4 className="text-white font-semibold text-sm sm:text-base">
+                      {t.author}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-text-muted">{t.role}</p>
                   </div>
+                  <span className="text-xs font-mono text-accent-cyan/80 px-2 py-0.5 rounded bg-accent-cyan/10 border border-accent-cyan/20">
+                    Verified
+                  </span>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Dots Indicator */}
+        {/* Indicators */}
         <div className="flex justify-center gap-2 mt-6">
           {testimonials.map((_, i) => (
             <button
               key={i}
+              type="button"
               onClick={() => scrollToIndex(i)}
               aria-label={`Go to testimonial ${i + 1}`}
               className={cn(
-                'transition-all duration-300 rounded-full',
+                'h-2 rounded-full transition-all duration-300',
                 activeIndex === i
-                  ? 'w-8 h-2 bg-accent-cyan'
-                  : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                  ? 'w-8 bg-accent-cyan shadow-[0_0_10px_rgba(6,182,212,0.5)]'
+                  : 'w-2 bg-white/20 hover:bg-white/40'
               )}
             />
           ))}

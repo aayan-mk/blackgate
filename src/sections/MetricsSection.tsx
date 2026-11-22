@@ -3,30 +3,30 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { SectionBadge } from '@/components/SectionBadge';
-import { Activity, Server, Globe } from 'lucide-react';
+import { ShieldCheck, UserCheck, Layers } from 'lucide-react';
 import { GlowCard } from '@/components/GlowCard';
 
 const metrics = [
   {
-    icon: Activity,
-    value: 99.9,
-    suffix: '%',
-    label: 'SERVICE UPTIME',
-    comparison: '+2.41% vs last month',
-  },
-  {
-    icon: Server,
-    value: 1000,
-    suffix: '+',
-    label: 'Managed Servers',
-    comparison: '+180 vs last month',
-  },
-  {
-    icon: Globe,
+    icon: ShieldCheck,
     value: 100,
-    suffix: '+',
-    label: 'Global Regions',
-    comparison: '+12 vs last month',
+    suffix: '%',
+    label: 'Security-First Mindset',
+    comparison: 'Zero legacy technical debt',
+  },
+  {
+    icon: UserCheck,
+    value: 100,
+    suffix: '%',
+    label: 'Direct Founder Access',
+    comparison: 'Hands-on engineering, zero middlemen',
+  },
+  {
+    icon: Layers,
+    value: 4,
+    suffix: ' Core',
+    label: 'Integrated Disciplines',
+    comparison: 'Web, Security, Forensics & AI',
   },
 ];
 
@@ -42,12 +42,12 @@ export default function MetricsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <SectionBadge text="Live Dashboard" />
+          <SectionBadge text="Early Stage Focus" />
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-            OPERATIONAL METRICS
+            FOUNDATION BENCHMARKS
           </h2>
-          <p className="text-text-secondary">
-            Clear visibility into platform health
+          <p className="text-text-secondary max-w-xl mx-auto">
+            Built lean, agile, and secure from day one — grounded metrics with honest engineering and direct collaboration.
           </p>
         </ScrollReveal>
 
@@ -97,14 +97,17 @@ export default function MetricsSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 p-6"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-white">Platform Performance</h3>
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <h3 className="text-lg font-semibold text-white">Active Architecture & CI/CD Benchmarks</h3>
+              <p className="text-xs sm:text-sm text-text-muted mt-0.5">Continuous testing, automated dependency audits, and modern deployment standards</p>
+            </div>
+            <div className="flex items-center gap-2 self-start sm:self-auto">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
-              <span className="text-sm font-semibold text-emerald-400 tracking-wider">Live</span>
+              <span className="text-sm font-semibold text-emerald-400 tracking-wider">Active Build Pipeline</span>
             </div>
           </div>
           <div className="h-32 flex items-end gap-1.5">

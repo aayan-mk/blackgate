@@ -12,32 +12,32 @@ import featureAiSecurityImage from '@/assets/feature-ai-security.jpg';
 const features = [
   {
     number: 1,
-    title: 'Managed Kubernetes',
-    description: 'Container orchestration with auto-scaling, self-healing, and zero-downtime management.',
+    title: 'Cloud-Native Setup',
+    description: 'Clean container setups with automated deployments and reliable cloud baselines.',
     image: featureKubernetesImage,
   },
   {
     number: 2,
-    title: 'Global Edge Network',
-    description: 'Worldwide CDN with low latency and high availability.',
+    title: 'Secure-by-Design Web',
+    description: 'High-performance, responsive web architectures with strict security headers.',
     image: featureEdgeNetworkImage,
   },
   {
     number: 3,
-    title: 'Zero-Trust Architecture',
-    description: 'Security by identity, least privilege for every access.',
+    title: 'Zero-Trust Principles',
+    description: 'Identity-first access controls and least-privilege security across all endpoints.',
     image: featureZeroTrustImage,
   },
   {
     number: 4,
-    title: 'Scalability & Performance',
-    description: 'Auto-scaling infrastructure for consistent performance.',
+    title: 'Built to Scale',
+    description: 'Clean codebases structured to accommodate growing traffic without costly rewrites.',
     image: featureScalabilityImage,
   },
   {
     number: 5,
-    title: 'AI Driven Security',
-    description: 'Smart defense by machine learning & behavioral analytics.',
+    title: 'Applied AI Workflows',
+    description: 'Intelligent automation and smart integrations that solve real business bottlenecks.',
     image: featureAiSecurityImage,
   },
 ];
@@ -50,10 +50,10 @@ export default function UncompromiseSection() {
         <ScrollReveal className="text-center mb-12">
           <SectionBadge text="Infrastructure" />
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-            THE BLACKGATE UNCOMPROMISE
+            THE BLACKGATE FOUNDATION
           </h2>
-          <p className="text-text-secondary">
-            The infrastructure. Continuous advantage delivery.
+          <p className="text-text-secondary max-w-lg mx-auto">
+            Modern infrastructure and development principles engineered with care from day one.
           </p>
         </ScrollReveal>
 

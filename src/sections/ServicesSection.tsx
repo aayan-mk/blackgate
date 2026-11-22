@@ -15,13 +15,13 @@ const services = [
     image: serviceWebImage,
     title: 'Web Design & Development',
     description:
-      'Your digital presence is your first line of defense. We build experiences that convert visitors into believers.',
+      'Your digital presence is your first impression. We build modern, responsive web experiences with security baked in.',
     points: [
-      'High-performance websites',
-      'UI/UX focused on conversion',
-      'Secure-by-design architecture',
+      'High-performance modern frameworks',
+      'UI/UX focused on clear conversion',
+      'Secure-by-design front & back-end',
     ],
-    emphasis: "Performance isn't optional. Security isn't negotiable.",
+    emphasis: 'Fast. Modern. Built with clean architecture.',
     cta: 'Learn More',
     to: '/services/web-development',
   },
@@ -29,13 +29,13 @@ const services = [
     image: serviceCybersecurityImage,
     title: 'Cybersecurity Solutions',
     description:
-      'One breach can end your business. We make sure it never happens.',
+      'Security planning, vulnerability assessments, and risk mitigation tailored for emerging businesses and startups.',
     points: [
-      'Vulnerability assessment & penetration testing',
-      'Secure infrastructure planning',
-      'Risk analysis and compliance support',
+      'Vulnerability assessment & discovery',
+      'Secure cloud infrastructure planning',
+      'Access control & zero-trust posture',
     ],
-    emphasis: 'Your reputation depends on our vigilance.',
+    emphasis: 'Proactive defense and vulnerability reduction from day one.',
     cta: 'Learn More',
     to: '/services/cybersecurity',
   },
@@ -43,13 +43,13 @@ const services = [
     image: serviceForensicsImage,
     title: 'Cyber Forensics',
     description:
-      'When incidents happen, evidence matters. We investigate, analyze, and reconstruct digital events with forensic precision.',
+      'Digital investigation, incident triage, and root-cause analysis to ensure security gaps are traced and remediated.',
     points: [
-      'Incident response & digital investigation',
-      'Evidence collection & chain of custody',
-      'Breach analysis & root cause identification',
+      'Incident triage & log analysis',
+      'Evidence collection & timeline review',
+      'Remediation plans to prevent recurrence',
     ],
-    emphasis: 'The truth is in the logs. We find it.',
+    emphasis: 'Systematic analysis and rigorous evidence preservation.',
     cta: 'Learn More',
     to: '/services/cyber-forensics',
   },
@@ -57,13 +57,13 @@ const services = [
     image: serviceAiImage,
     title: 'AI Solutions',
     description:
-      'Intelligence that scales your business while you sleep. Automation that compounds.',
+      'Practical automation, custom document workflows, and intelligent integrations that eliminate operational drag.',
     points: [
-      'AI chatbots & agents',
-      'Business automation',
-      'Predictive analytics & intelligent systems',
+      'Intelligent workflows & automation',
+      'Document parsing & data extraction',
+      'Custom AI assistants & integrations',
     ],
-    emphasis: "AI isn't the future. It's the present, if you're ready.",
+    emphasis: 'Real-world utility without unnecessary complexity.',
     cta: 'Learn More',
     to: '/services/ai-solutions',
   },
@@ -146,7 +146,7 @@ export default function ServicesSection() {
             Our Services
           </h2>
           <p className="text-text-secondary max-w-md mx-auto">
-            Four pillars of digital defense. One uncompromising standard.
+            Four core pillars of digital defense and modern development — honest, security-first, and built for growth.
           </p>
         </ScrollReveal>
 

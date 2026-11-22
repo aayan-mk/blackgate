@@ -1,6 +1,7 @@
 import { useMemo, lazy, Suspense, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { SectionBadge } from '@/components/SectionBadge';
 
 const RotatingEarth = lazy(() => import('@/components/ui/wireframe-dotted-globe'));
 
@@ -126,6 +127,14 @@ export default function HeroSection() {
             animate="visible"
             className="text-center lg:text-left w-full"
           >
+            {/* Early access badge */}
+            <motion.div variants={itemVariants} className="mb-4 inline-flex items-center">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Early Access Pilot • Now Accepting New Projects</span>
+              </span>
+            </motion.div>
+
             {/* Animated title - word by word */}
             <div className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-bold text-white mb-6 leading-tight max-w-3xl mx-auto lg:mx-0">
               {titleWords.map((word, i) => (
@@ -155,7 +164,7 @@ export default function HeroSection() {
               variants={itemVariants}
               className="text-base sm:text-lg md:text-xl text-text-secondary mb-8 sm:mb-10 max-w-2xl mx-auto lg:mx-0"
             >
-              Your uncompromised cloud and cybersecurity fortress.
+              An emerging web engineering and cybersecurity studio. We craft modern, resilient web systems and AI automations built right from day one.
             </motion.p>
 
             <motion.div 
@@ -168,14 +177,14 @@ export default function HeroSection() {
               >
                 {/* Shimmer effect */}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                <span className="relative">Get Started</span>
+                <span className="relative">Start a Project</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 relative" />
               </a>
               <a
                 href="#services"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 sm:py-4 text-base font-medium text-accent-cyan border border-accent-cyan/50 rounded-full hover:bg-accent-cyan/10 transition-all duration-300 hover:border-accent-cyan hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] w-full sm:w-auto"
               >
-                Learn More
+                Explore Services
               </a>
             </motion.div>
           </motion.div>

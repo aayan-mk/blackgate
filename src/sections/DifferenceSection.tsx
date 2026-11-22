@@ -9,26 +9,26 @@ import featureZeroTrustImage from '@/assets/feature-zero-trust.jpg';
 const differences = [
   {
     number: 1,
-    title: 'Clean Edge',
-    subtitle: 'Edge Computing',
+    title: 'Direct Engineer Access',
+    subtitle: 'Zero Bureaucracy',
     image: differenceEdgeImage,
   },
   {
     number: 2,
-    title: 'Scalability & Performance',
-    subtitle: 'Auto-Scaling',
+    title: 'Modern, Zero-Legacy Tech',
+    subtitle: 'Clean Code',
     image: differenceScaleImage,
   },
   {
     number: 3,
-    title: 'AI Driven Security',
-    subtitle: 'Threat Detection',
+    title: 'Security-by-Design',
+    subtitle: 'Day-One Defense',
     image: differenceAiSecurityImage,
   },
   {
     number: 4,
-    title: '24/7 Threat Intelligence',
-    subtitle: 'Threat Intelligence',
+    title: 'Agile & Collaborative',
+    subtitle: 'Rapid Iteration',
     image: featureZeroTrustImage,
   },
 ];
@@ -39,12 +39,12 @@ export default function DifferenceSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <SectionBadge text="Why Choose Us" />
+          <SectionBadge text="Why Partner With Us" />
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-            THE BLACKGATE DIFFERENCE
+            THE BLACKGATE ADVANTAGE
           </h2>
-          <p className="text-text-secondary">
-            Five integrated advantages. One security advantage.
+          <p className="text-text-secondary max-w-lg mx-auto">
+            Why early-stage teams and growing projects choose an agile, dedicated engineering partner over bureaucratic agencies.
           </p>
         </ScrollReveal>
 

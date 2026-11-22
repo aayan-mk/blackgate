@@ -37,50 +37,52 @@ function contactApiPlugin() {
             const recipient =
               process.env.CONTACT_RECEIVER_EMAIL || 'info@blackgateitsolutions.co.in';
 
-            if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-              const isGmail =
-                process.env.SMTP_SERVICE === 'gmail' ||
-                process.env.SMTP_HOST?.includes('gmail') ||
-                process.env.SMTP_USER?.includes('@gmail.com');
-
-              const transporter = isGmail
-                ? nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      user: process.env.SMTP_USER,
-                      pass: process.env.SMTP_PASS,
-                    },
-                  })
-                : nodemailer.createTransport({
-                    host: process.env.SMTP_HOST,
-                    port: Number(process.env.SMTP_PORT) || 587,
-                    secure: Number(process.env.SMTP_PORT) === 465,
-                    auth: {
-                      user: process.env.SMTP_USER,
-                      pass: process.env.SMTP_PASS,
-                    },
-                  });
-
-              await transporter.sendMail({
-                from: `"${name}" <${process.env.SMTP_USER}>`,
-                replyTo: email,
-                to: recipient,
-                subject: `New Inquiry from ${name} [${inquiryType || 'General'}]`,
-                text: `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\nInquiry Type: ${inquiryType || 'General'}\n\nMessage:\n${message}`,
-              });
-              console.log(`[Dev Server] Sent email to ${recipient}`);
-            } else {
-              console.log('--- [Dev Server: Inquiry Received] ---');
-              console.log({
-                timestamp: new Date().toISOString(),
-                name,
-                email,
-                company: company || 'N/A',
-                inquiryType: inquiryType || 'General',
-                message,
-                destination: recipient,
-              });
+            if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+              console.error('[Dev Server Error]: SMTP credentials not configured in .env');
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              return res.end(
+                JSON.stringify({
+                  success: false,
+                  error:
+                    'Email service is not configured. Please set SMTP_USER and SMTP_PASS (Gmail App Password) in your .env file.',
+                })
+              );
             }
+
+            const isGmail =
+              process.env.SMTP_SERVICE === 'gmail' ||
+              process.env.SMTP_HOST?.includes('gmail') ||
+              process.env.SMTP_USER?.includes('@gmail.com');
+
+            const cleanPass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
+
+            const transporter = isGmail
+              ? nodemailer.createTransport({
+                  service: 'gmail',
+                  auth: {
+                    user: process.env.SMTP_USER,
+                    pass: cleanPass,
+                  },
+                })
+              : nodemailer.createTransport({
+                  host: process.env.SMTP_HOST,
+                  port: Number(process.env.SMTP_PORT) || 587,
+                  secure: Number(process.env.SMTP_PORT) === 465,
+                  auth: {
+                    user: process.env.SMTP_USER,
+                    pass: cleanPass,
+                  },
+                });
+
+            await transporter.sendMail({
+              from: `"${name}" <${process.env.SMTP_USER}>`,
+              replyTo: email,
+              to: recipient,
+              subject: `New Inquiry from ${name} [${inquiryType || 'General'}]`,
+              text: `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\nInquiry Type: ${inquiryType || 'General'}\n\nMessage:\n${message}`,
+            });
+            console.log(`[Dev Server] Sent email to ${recipient}`);
 
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -97,7 +99,7 @@ function contactApiPlugin() {
             res.end(
               JSON.stringify({
                 success: false,
-                error: 'Failed to process inquiry.',
+                error: err.message || 'Failed to process inquiry.',
               })
             );
           }

@@ -16,18 +16,35 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Transporter configuration
+// Transporter configuration (supports Gmail directly or custom SMTP)
 const createTransporter = () => {
-  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-    return nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: Number(process.env.SMTP_PORT) === 465,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+  if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+    const isGmail =
+      process.env.SMTP_SERVICE === 'gmail' ||
+      process.env.SMTP_HOST?.includes('gmail') ||
+      process.env.SMTP_USER?.includes('@gmail.com');
+
+    if (isGmail) {
+      return nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS, // Google 16-character App Password
+        },
+      });
+    }
+
+    if (process.env.SMTP_HOST) {
+      return nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT) || 587,
+        secure: Number(process.env.SMTP_PORT) === 465,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      });
+    }
   }
   return null;
 };

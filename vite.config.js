@@ -37,16 +37,29 @@ function contactApiPlugin() {
             const recipient =
               process.env.CONTACT_RECEIVER_EMAIL || 'info@blackgateitsolutions.co.in';
 
-            if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-              const transporter = nodemailer.createTransport({
-                host: process.env.SMTP_HOST,
-                port: Number(process.env.SMTP_PORT) || 587,
-                secure: Number(process.env.SMTP_PORT) === 465,
-                auth: {
-                  user: process.env.SMTP_USER,
-                  pass: process.env.SMTP_PASS,
-                },
-              });
+            if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+              const isGmail =
+                process.env.SMTP_SERVICE === 'gmail' ||
+                process.env.SMTP_HOST?.includes('gmail') ||
+                process.env.SMTP_USER?.includes('@gmail.com');
+
+              const transporter = isGmail
+                ? nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: process.env.SMTP_USER,
+                      pass: process.env.SMTP_PASS,
+                    },
+                  })
+                : nodemailer.createTransport({
+                    host: process.env.SMTP_HOST,
+                    port: Number(process.env.SMTP_PORT) || 587,
+                    secure: Number(process.env.SMTP_PORT) === 465,
+                    auth: {
+                      user: process.env.SMTP_USER,
+                      pass: process.env.SMTP_PASS,
+                    },
+                  });
 
               await transporter.sendMail({
                 from: `"${name}" <${process.env.SMTP_USER}>`,

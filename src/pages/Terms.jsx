@@ -379,7 +379,7 @@ function Terms() {
             </p>
             
             <div className="contact-details">
-              <p><strong>Email:</strong> legal@blackgate.dev</p>
+              <p><strong>Email:</strong> info@blackgateitsolutions.co.in</p>
               <p><strong>Address:</strong> Blackgate Technologies, Mumbai, India</p>
             </div>
           </motion.div>

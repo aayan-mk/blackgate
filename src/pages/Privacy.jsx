@@ -168,7 +168,7 @@ function Privacy() {
             </ul>
 
             <p>
-              To exercise these rights, contact us at <strong>privacy@blackgate.dev</strong>
+              To exercise these rights, contact us at <strong>info@blackgateitsolutions.co.in</strong>
             </p>
           </motion.div>
 
@@ -273,7 +273,7 @@ function Privacy() {
             </p>
             
             <div className="contact-details">
-              <p><strong>Email:</strong> privacy@blackgate.dev</p>
+              <p><strong>Email:</strong> info@blackgateitsolutions.co.in</p>
               <p><strong>Address:</strong> Blackgate Technologies, Mumbai, India</p>
             </div>
           </motion.div>

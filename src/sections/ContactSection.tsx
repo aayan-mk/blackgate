@@ -112,7 +112,7 @@ export default function ContactSection() {
           <div className="w-8 h-8 rounded-full bg-accent-cyan/10 flex items-center justify-center flex-shrink-0 border border-accent-cyan/20">
             <Mail className="w-4 h-4 text-accent-cyan" />
           </div>
-          <a href="mailto:blackgatesolutions@gmail.com" className="hover:text-white transition-colors">blackgatesolutions@gmail.com</a>
+          <a href="mailto:info@blackgateitsolutions.co.in" className="hover:text-white transition-colors">info@blackgateitsolutions.co.in</a>
         </div>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-accent-cyan/10 flex items-center justify-center flex-shrink-0 border border-accent-cyan/20">
@@ -125,7 +125,7 @@ export default function ContactSection() {
       {/* Trust Badges */}
       <div className="mt-5 text-center">
         <p className="text-[10px] sm:text-xs text-text-muted font-medium tracking-wide">
-          SOC 2 Type II Certified • ISO 27001 Compliant • GDPR Ready
+          Zero-Trust Architecture • Security by Design • Privacy Conscious
         </p>
       </div>
     </GlowCard>

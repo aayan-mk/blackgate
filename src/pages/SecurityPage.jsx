@@ -365,7 +365,7 @@ function Security() {
             </p>
             
             <div className="contact-details">
-              <p><strong>Email:</strong> security@blackgate.dev</p>
+              <p><strong>Email:</strong> info@blackgateitsolutions.co.in</p>
               <p><strong>PGP Key:</strong> Available upon request for encrypted communication</p>
             </div>
 

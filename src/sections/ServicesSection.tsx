@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ServiceCard } from '@/components/ServiceCard';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SectionBadge } from '@/components/SectionBadge';
 import { cn } from '@/lib/utils';
 import serviceWebImage from '@/assets/service-cloud-native.jpg';
 import serviceCybersecurityImage from '@/assets/service-cybersecurity.jpg';
@@ -14,13 +15,13 @@ const services = [
     image: serviceWebImage,
     title: 'Web Design & Development',
     description:
-      'Your digital presence is your first line of defense. We build experiences that convert visitors into believers.',
+      'Your digital presence is your first impression. We build modern, responsive web experiences with security baked in.',
     points: [
-      'High-performance websites',
-      'UI/UX focused on conversion',
-      'Secure-by-design architecture',
+      'High-performance modern frameworks',
+      'UI/UX focused on clear conversion',
+      'Secure-by-design front & back-end',
     ],
-    emphasis: "Performance isn't optional. Security isn't negotiable.",
+    emphasis: 'Fast. Modern. Built with clean architecture.',
     cta: 'Learn More',
     to: '/services/web-development',
   },
@@ -28,13 +29,13 @@ const services = [
     image: serviceCybersecurityImage,
     title: 'Cybersecurity Solutions',
     description:
-      'One breach can end your business. We make sure it never happens.',
+      'Security planning, vulnerability assessments, and risk mitigation tailored for emerging businesses and startups.',
     points: [
-      'Vulnerability assessment & penetration testing',
-      'Secure infrastructure planning',
-      'Risk analysis and compliance support',
+      'Vulnerability assessment & discovery',
+      'Secure cloud infrastructure planning',
+      'Access control & zero-trust posture',
     ],
-    emphasis: 'Your reputation depends on our vigilance.',
+    emphasis: 'Proactive defense and vulnerability reduction from day one.',
     cta: 'Learn More',
     to: '/services/cybersecurity',
   },
@@ -42,13 +43,13 @@ const services = [
     image: serviceForensicsImage,
     title: 'Cyber Forensics',
     description:
-      'When incidents happen, evidence matters. We investigate, analyze, and reconstruct digital events with forensic precision.',
+      'Digital investigation, incident triage, and root-cause analysis to ensure security gaps are traced and remediated.',
     points: [
-      'Incident response & digital investigation',
-      'Evidence collection & chain of custody',
-      'Breach analysis & root cause identification',
+      'Incident triage & log analysis',
+      'Evidence collection & timeline review',
+      'Remediation plans to prevent recurrence',
     ],
-    emphasis: 'The truth is in the logs. We find it.',
+    emphasis: 'Systematic analysis and rigorous evidence preservation.',
     cta: 'Learn More',
     to: '/services/cyber-forensics',
   },
@@ -56,13 +57,13 @@ const services = [
     image: serviceAiImage,
     title: 'AI Solutions',
     description:
-      'Intelligence that scales your business while you sleep. Automation that compounds.',
+      'Practical automation, custom document workflows, and intelligent integrations that eliminate operational drag.',
     points: [
-      'AI chatbots & agents',
-      'Business automation',
-      'Predictive analytics & intelligent systems',
+      'Intelligent workflows & automation',
+      'Document parsing & data extraction',
+      'Custom AI assistants & integrations',
     ],
-    emphasis: "AI isn't the future. It's the present, if you're ready.",
+    emphasis: 'Real-world utility without unnecessary complexity.',
     cta: 'Learn More',
     to: '/services/ai-solutions',
   },
@@ -140,11 +141,12 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <SectionBadge text="What We Do" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
             Our Services
           </h2>
-          <p className="text-text-secondary">
-            Four pillars of digital defense. One uncompromising standard.
+          <p className="text-text-secondary max-w-md mx-auto">
+            Four core pillars of digital defense and modern development — honest, security-first, and built for growth.
           </p>
         </ScrollReveal>
 
@@ -156,9 +158,9 @@ export default function ServicesSection() {
             disabled={!canScrollLeft}
             aria-label="Previous service"
             className={cn(
-              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
+              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-sm border flex items-center justify-center transition-all shadow-lg',
               canScrollLeft
-                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
+                ? 'border-white/20 text-white/70 hover:text-white hover:border-accent-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-110'
                 : 'border-white/10 text-white/30 cursor-not-allowed'
             )}
           >
@@ -169,9 +171,9 @@ export default function ServicesSection() {
             disabled={!canScrollRight}
             aria-label="Next service"
             className={cn(
-              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
+              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-sm border flex items-center justify-center transition-all shadow-lg',
               canScrollRight
-                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
+                ? 'border-white/20 text-white/70 hover:text-white hover:border-accent-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-110'
                 : 'border-white/10 text-white/30 cursor-not-allowed'
             )}
           >
@@ -190,10 +192,10 @@ export default function ServicesSection() {
                 ref={(node) => {
                   cardRefs.current[index] = node;
                 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
                 className="snap-start shrink-0 flex h-auto"
               >
                 <ServiceCard {...service} />
@@ -213,8 +215,8 @@ export default function ServicesSection() {
               className={cn(
                 'px-4 py-2 rounded-full text-xs sm:text-sm border transition-all duration-300 font-medium',
                 activeIndex === index
-                  ? 'bg-white border-white text-black shadow-[0_0_15px_rgba(255,255,255,0.3)]'
-                  : 'bg-black border-white/20 text-white/70 hover:border-white hover:text-white hover:bg-white/5'
+                  ? 'bg-accent-cyan border-accent-cyan text-bg-primary shadow-[0_0_20px_rgba(6,182,212,0.3)]'
+                  : 'bg-black border-white/20 text-white/70 hover:border-accent-cyan/50 hover:text-white hover:bg-accent-cyan/5'
               )}
             >
               {service.title}

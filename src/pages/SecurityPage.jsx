@@ -63,7 +63,7 @@ function Security() {
                 </div>
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
                   <h4 className="text-white font-semibold mb-2">Continuous Monitoring</h4>
-                  <p className="text-sm text-text-muted">24/7 surveillance of systems, networks, and data for suspicious activity.</p>
+                  <p className="text-sm text-text-muted">Surveillance of systems, networks, and data for suspicious activity.</p>
                 </div>
               </div>
             </div>
@@ -110,10 +110,10 @@ function Security() {
               </p>
               
               <ul className="space-y-3 text-text-secondary">
-                <li className="flex items-start gap-3"><CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" /><span><strong className="text-white">MFA Required:</strong> Multi-factor authentication is mandatory for all Blackgate employees.</span></li>
+                <li className="flex items-start gap-3"><CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" /><span><strong className="text-white">MFA Required:</strong> Multi-factor authentication is mandatory for all Blackgate team members.</span></li>
                 <li className="flex items-start gap-3"><CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" /><span><strong className="text-white">Role-Based Access:</strong> Access to systems and data is granted based on job responsibilities.</span></li>
                 <li className="flex items-start gap-3"><CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" /><span><strong className="text-white">Regular Audits:</strong> Access logs are reviewed regularly for anomalies.</span></li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" /><span><strong className="text-white">Prompt Revocation:</strong> Access is immediately revoked upon employee termination.</span></li>
+                <li className="flex items-start gap-3"><CheckCircle2 size={18} className="text-cyan-primary shrink-0 mt-1" /><span><strong className="text-white">Prompt Revocation:</strong> Access is immediately revoked upon team member departure.</span></li>
               </ul>
             </div>
           </AnimatedSection>
@@ -135,7 +135,7 @@ function Security() {
               <div className="grid gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5">
                   <span className="text-white font-semibold">Email:</span>
-                  <span className="text-cyan-primary ml-2">blackgatesolutions@gmail.com</span>
+                  <span className="text-cyan-primary ml-2">info@blackgateitsolutions.co.in</span>
                 </div>
                 <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5">
                   <span className="text-white font-semibold">PGP Key:</span>

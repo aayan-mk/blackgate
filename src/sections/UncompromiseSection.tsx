@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FeatureCard } from '@/components/FeatureCard';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SectionBadge } from '@/components/SectionBadge';
 import ContactSection from './ContactSection';
 import featureKubernetesImage from '@/assets/feature-kubernetes.jpg';
 import featureEdgeNetworkImage from '@/assets/feature-edge-network.jpg';
@@ -11,32 +12,32 @@ import featureAiSecurityImage from '@/assets/feature-ai-security.jpg';
 const features = [
   {
     number: 1,
-    title: 'Managed Kubernetes',
-    description: 'Container orchestration with auto-scaling, self-healing, and zero-downtime management.',
+    title: 'Cloud-Native Setup',
+    description: 'Clean container setups with automated deployments and reliable cloud baselines.',
     image: featureKubernetesImage,
   },
   {
     number: 2,
-    title: 'Global Edge Network',
-    description: 'Worldwide CDN with low latency and high availability.',
+    title: 'Secure-by-Design Web',
+    description: 'High-performance, responsive web architectures with strict security headers.',
     image: featureEdgeNetworkImage,
   },
   {
     number: 3,
-    title: 'Zero-Trust Architecture',
-    description: 'Security by identity, least privilege for every access.',
+    title: 'Zero-Trust Principles',
+    description: 'Identity-first access controls and least-privilege security across all endpoints.',
     image: featureZeroTrustImage,
   },
   {
     number: 4,
-    title: 'Scalability & Performance',
-    description: 'Auto-scaling infrastructure for consistent performance.',
+    title: 'Built to Scale',
+    description: 'Clean codebases structured to accommodate growing traffic without costly rewrites.',
     image: featureScalabilityImage,
   },
   {
     number: 5,
-    title: 'AI Driven Security',
-    description: 'Smart defense by machine learning & behavioral analytics.',
+    title: 'Applied AI Workflows',
+    description: 'Intelligent automation and smart integrations that solve real business bottlenecks.',
     image: featureAiSecurityImage,
   },
 ];
@@ -47,11 +48,12 @@ export default function UncompromiseSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-            THE BLACKGATE UNCOMPROMISE
+          <SectionBadge text="Infrastructure" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
+            THE BLACKGATE FOUNDATION
           </h2>
-          <p className="text-text-secondary">
-            The infrastructure. Continuous advantage delivery.
+          <p className="text-text-secondary max-w-lg mx-auto">
+            Modern infrastructure and development principles engineered with care from day one.
           </p>
         </ScrollReveal>
 
@@ -61,10 +63,10 @@ export default function UncompromiseSection() {
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
                 className="h-full"
               >
                 <FeatureCard {...feature} />

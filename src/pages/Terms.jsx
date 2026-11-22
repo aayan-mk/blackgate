@@ -198,6 +198,7 @@ function Terms() {
             </div>
           </AnimatedSection>
 
+          {/* 8. Limitation of Liability & Termination */}
           <AnimatedSection delay={0.7}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 rounded-3xl bg-bg-card border border-white/10">
@@ -216,6 +217,7 @@ function Terms() {
             </div>
           </AnimatedSection>
 
+          {/* 10. Indemnification & Dispute Resolution */}
           <AnimatedSection delay={0.8}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 rounded-3xl bg-bg-card border border-white/10">
@@ -238,6 +240,7 @@ function Terms() {
             </div>
           </AnimatedSection>
 
+          {/* 12. Changes & Contact */}
           <AnimatedSection delay={0.9}>
             <div className="rounded-3xl bg-bg-card p-8 md:p-10 gradient-border flex flex-col md:flex-row gap-12 justify-between">
               <div>
@@ -249,7 +252,7 @@ function Terms() {
                 <div className="grid gap-4">
                   <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5 inline-block">
                     <span className="text-white font-semibold">Email:</span>
-                    <span className="text-cyan-primary ml-2">blackgatesolutions@gmail.com</span>
+                    <span className="text-cyan-primary ml-2">info@blackgateitsolutions.co.in</span>
                   </div>
                   <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5 inline-block">
                     <span className="text-white font-semibold">Address:</span>

@@ -158,7 +158,7 @@ function Privacy() {
 
               <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5">
                 <span className="text-text-secondary">To exercise these rights, contact us at </span>
-                <strong className="text-cyan-primary ml-1">privacy@blackgate.dev</strong>
+                <strong className="text-cyan-primary ml-1">info@blackgateitsolutions.co.in</strong>
               </div>
             </div>
           </AnimatedSection>
@@ -196,7 +196,7 @@ function Privacy() {
               <div className="grid gap-4">
                 <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5">
                   <span className="text-white font-semibold">Email:</span>
-                  <span className="text-cyan-primary ml-2">blackgatesolutions@gmail.com</span>
+                  <span className="text-cyan-primary ml-2">info@blackgateitsolutions.co.in</span>
                 </div>
                 <div className="p-4 rounded-xl bg-bg-primary/50 border border-white/5">
                   <span className="text-white font-semibold">Address:</span>

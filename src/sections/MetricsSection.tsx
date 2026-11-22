@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SectionBadge } from '@/components/SectionBadge';
 import { Activity, Server, Globe } from 'lucide-react';
 import { GlowCard } from '@/components/GlowCard';
 
@@ -41,7 +42,8 @@ export default function MetricsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <SectionBadge text="Live Dashboard" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
             OPERATIONAL METRICS
           </h2>
           <p className="text-text-secondary">
@@ -54,14 +56,14 @@ export default function MetricsSection() {
           {metrics.map((metric, index) => (
             <GlowCard
               key={metric.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
               className="p-6"
             >
               {/* Icon */}
-              <div className="w-12 h-12 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center mb-4 group-hover:bg-accent-cyan/20 transition-colors">
+              <div className="w-12 h-12 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center mb-4 group-hover:bg-accent-cyan/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-300">
                 <metric.icon className="w-6 h-6 text-accent-cyan" />
               </div>
 
@@ -109,7 +111,7 @@ export default function MetricsSection() {
             {barHeights.map((height, i) => (
               <motion.div
                 key={i}
-                className="flex-1 h-full bg-accent-cyan/40 rounded-t origin-bottom hover:bg-accent-cyan/80 transition-colors duration-200"
+                className="flex-1 h-full bg-gradient-to-t from-accent-cyan/20 to-accent-cyan/50 rounded-t origin-bottom hover:from-accent-cyan/40 hover:to-accent-cyan/80 transition-colors duration-200"
                 initial={{ scaleY: 0.2 }}
                 animate={
                   shouldReduceMotion

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FeatureCard } from '@/components/FeatureCard';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SectionBadge } from '@/components/SectionBadge';
 import ContactSection from './ContactSection';
 import featureKubernetesImage from '@/assets/feature-kubernetes.jpg';
 import featureEdgeNetworkImage from '@/assets/feature-edge-network.jpg';
@@ -47,7 +48,8 @@ export default function UncompromiseSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <SectionBadge text="Infrastructure" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
             THE BLACKGATE UNCOMPROMISE
           </h2>
           <p className="text-text-secondary">
@@ -61,10 +63,10 @@ export default function UncompromiseSection() {
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
                 className="h-full"
               >
                 <FeatureCard {...feature} />
@@ -73,9 +75,15 @@ export default function UncompromiseSection() {
           </div>
 
           {/* Contact Form Column (Right, approx 33%, 4 cols) */}
-          <div className="lg:col-span-4 w-full">
+          <motion.div
+            className="lg:col-span-4 w-full"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             <ContactSection />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

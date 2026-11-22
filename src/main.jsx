@@ -1,6 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import './index.css'
 import App from './App.jsx'
 import logoImage from './assets/white-logo.png'
@@ -37,31 +38,56 @@ if (existingIcon) {
   document.head.appendChild(iconLink)
 }
 
+const pageTransition = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+  transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+}
+
+function PageWrapper({ children }) {
+  return (
+    <motion.div {...pageTransition}>
+      {children}
+    </motion.div>
+  )
+}
+
+function AnimatedRoutes() {
+  const location = useLocation()
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageWrapper><App /></PageWrapper>} />
+        <Route path="/services/web-development" element={<PageWrapper><WebDevelopment /></PageWrapper>} />
+        <Route path="/services/cybersecurity" element={<PageWrapper><Cybersecurity /></PageWrapper>} />
+        <Route path="/services/cyber-forensics" element={<PageWrapper><CyberForensics /></PageWrapper>} />
+        <Route path="/services/ai-solutions" element={<PageWrapper><AISolutions /></PageWrapper>} />
+        <Route path="/services" element={<Navigate to="/services/web-development" replace />} />
+        <Route path="/services/*" element={<Navigate to="/services/web-development" replace />} />
+        <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+        <Route path="/case-studies" element={<PageWrapper><CaseStudies /></PageWrapper>} />
+        <Route path="/privacy" element={<PageWrapper><Privacy /></PageWrapper>} />
+        <Route path="/terms" element={<PageWrapper><Terms /></PageWrapper>} />
+        <Route path="/security" element={<PageWrapper><SecurityPage /></PageWrapper>} />
+        <Route path="/product" element={<PageWrapper><Product /></PageWrapper>} />
+        <Route path="/features" element={<PageWrapper><Feature /></PageWrapper>} />
+        <Route path="/feature" element={<PageWrapper><Feature /></PageWrapper>} />
+        <Route path="/resources" element={<PageWrapper><Resources /></PageWrapper>} />
+        <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
+        <Route path="/signup" element={<PageWrapper><SignUp /></PageWrapper>} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <OrbGridBackground />
       <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/services/web-development" element={<WebDevelopment />} />
-          <Route path="/services/cybersecurity" element={<Cybersecurity />} />
-          <Route path="/services/cyber-forensics" element={<CyberForensics />} />
-          <Route path="/services/ai-solutions" element={<AISolutions />} />
-          <Route path="/services" element={<Navigate to="/services/web-development" replace />} />
-          <Route path="/services/*" element={<Navigate to="/services/web-development" replace />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/case-studies" element={<CaseStudies />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/security" element={<SecurityPage />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/features" element={<Feature />} />
-          <Route path="/feature" element={<Feature />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
+        <AnimatedRoutes />
       </Suspense>
     </BrowserRouter>
   </StrictMode>,

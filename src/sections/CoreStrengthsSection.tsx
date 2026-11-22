@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { StrengthCard } from '@/components/StrengthCard';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SectionBadge } from '@/components/SectionBadge';
 import coreCloudNativeImage from '@/assets/core-cloud-native.jpg';
 import coreServerlessImage from '@/assets/core-serverless.jpg';
 import coreAiImage from '@/assets/core-ai.jpg';
@@ -29,7 +30,8 @@ export default function CoreStrengthsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <SectionBadge text="Technology Stack" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
             CORE STRENGTHS
           </h2>
           <p className="text-text-secondary">
@@ -42,10 +44,10 @@ export default function CoreStrengthsSection() {
           {strengths.map((strength, index) => (
             <motion.div
               key={strength.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <StrengthCard {...strength} />
             </motion.div>

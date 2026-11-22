@@ -91,12 +91,28 @@ module.exports = {
           '50%': { transform: 'translateY(-10px)' },
         },
         'pulse-glow': {
-          '0%, 100%': { opacity: '0.5', boxShadow: '0 0 20px rgba(6,182,212,0.3)' },
+          '0%, 100%': { opacity: '0.8', boxShadow: '0 0 20px rgba(6,182,212,0.3)' },
           '50%': { opacity: '1', boxShadow: '0 0 40px rgba(6,182,212,0.6)' },
         },
         'spin-slow': {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-200%)' },
+          '100%': { transform: 'translateX(200%)' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { transform: 'scale(0.9)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 15px rgba(6,182,212,0.2)' },
+          '50%': { boxShadow: '0 0 30px rgba(6,182,212,0.4)' },
         },
       },
       animation: {
@@ -106,6 +122,15 @@ module.exports = {
         float: 'float 6s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'spin-slow': 'spin-slow 20s linear infinite',
+        shimmer: 'shimmer 3s ease-in-out infinite',
+        'slide-up': 'slide-up 0.5s ease-out',
+        'scale-in': 'scale-in 0.4s ease-out',
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+      },
+      backdropBlur: {
+        xs: '2px',
+        '2xl': '40px',
+        '3xl': '64px',
       },
     },
   },

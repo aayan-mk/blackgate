@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ServiceCard } from '@/components/ServiceCard';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SectionBadge } from '@/components/SectionBadge';
 import { cn } from '@/lib/utils';
 import serviceWebImage from '@/assets/service-cloud-native.jpg';
 import serviceCybersecurityImage from '@/assets/service-cybersecurity.jpg';
@@ -140,10 +141,11 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <SectionBadge text="What We Do" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
             Our Services
           </h2>
-          <p className="text-text-secondary">
+          <p className="text-text-secondary max-w-md mx-auto">
             Four pillars of digital defense. One uncompromising standard.
           </p>
         </ScrollReveal>
@@ -156,9 +158,9 @@ export default function ServicesSection() {
             disabled={!canScrollLeft}
             aria-label="Previous service"
             className={cn(
-              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
+              'absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-sm border flex items-center justify-center transition-all shadow-lg',
               canScrollLeft
-                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
+                ? 'border-white/20 text-white/70 hover:text-white hover:border-accent-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-110'
                 : 'border-white/10 text-white/30 cursor-not-allowed'
             )}
           >
@@ -169,9 +171,9 @@ export default function ServicesSection() {
             disabled={!canScrollRight}
             aria-label="Next service"
             className={cn(
-              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border flex items-center justify-center transition-all shadow-lg',
+              'absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-sm border flex items-center justify-center transition-all shadow-lg',
               canScrollRight
-                ? 'border-white/20 text-white/70 hover:text-white hover:border-white hover:scale-110'
+                ? 'border-white/20 text-white/70 hover:text-white hover:border-accent-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-110'
                 : 'border-white/10 text-white/30 cursor-not-allowed'
             )}
           >
@@ -190,10 +192,10 @@ export default function ServicesSection() {
                 ref={(node) => {
                   cardRefs.current[index] = node;
                 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
                 className="snap-start shrink-0 flex h-auto"
               >
                 <ServiceCard {...service} />
@@ -213,8 +215,8 @@ export default function ServicesSection() {
               className={cn(
                 'px-4 py-2 rounded-full text-xs sm:text-sm border transition-all duration-300 font-medium',
                 activeIndex === index
-                  ? 'bg-white border-white text-black shadow-[0_0_15px_rgba(255,255,255,0.3)]'
-                  : 'bg-black border-white/20 text-white/70 hover:border-white hover:text-white hover:bg-white/5'
+                  ? 'bg-accent-cyan border-accent-cyan text-bg-primary shadow-[0_0_20px_rgba(6,182,212,0.3)]'
+                  : 'bg-black border-white/20 text-white/70 hover:border-accent-cyan/50 hover:text-white hover:bg-accent-cyan/5'
               )}
             >
               {service.title}

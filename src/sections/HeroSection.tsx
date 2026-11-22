@@ -1,7 +1,6 @@
 import { useMemo, lazy, Suspense, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { SectionBadge } from '@/components/SectionBadge';
+import { ArrowRight } from 'lucide-react';
 
 const RotatingEarth = lazy(() => import('@/components/ui/wireframe-dotted-globe'));
 
@@ -127,21 +126,6 @@ export default function HeroSection() {
             animate="visible"
             className="text-center lg:text-left w-full"
           >
-            {/* Early access badge */}
-            <motion.div variants={itemVariants} className="mb-6 inline-flex items-center justify-center lg:justify-start">
-              <a
-                href="#contact"
-                className="group/pilot inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium border border-accent-cyan/40 bg-accent-cyan/10 text-accent-cyan hover:bg-accent-cyan/20 hover:border-accent-cyan/80 transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] backdrop-blur-sm"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-                </span>
-                <span>Early Access Pilot • Now Accepting New Projects</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/pilot:translate-x-1" />
-              </a>
-            </motion.div>
-
             {/* Animated title - word by word */}
             <div className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-bold text-white mb-6 leading-tight max-w-3xl mx-auto lg:mx-0">
               {titleWords.map((word, i) => (

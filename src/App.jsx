@@ -11,7 +11,6 @@ import UncompromiseSection from './sections/UncompromiseSection';
 import TestimonialsSection from './sections/TestimonialsSection';
 import Footer from './sections/Footer';
 import { BackToTop } from './components/BackToTop';
-import { MagicCursor } from './components/MagicCursor';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <MagicCursor />
       <Navbar />
       <main className="relative z-10">
         <HeroSection />

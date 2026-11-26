@@ -34,7 +34,7 @@ function About() {
       icon: <Lock size={32} />
     },
     {
-      name: "Vidhaan Ghambire",
+      name: "Vidhan Gambhire",
       role: "Cyber Forensics & Incident Response",
       bio: "Leads digital investigations, evidence preservation, and post-incident analysis. Expert in reconstructing attack timelines and ensuring breaches never repeat.",
       icon: <Terminal size={32} />

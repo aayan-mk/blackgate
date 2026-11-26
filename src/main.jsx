@@ -7,6 +7,7 @@ import App from './App.jsx'
 import logoImage from './assets/white-logo.png'
 import OrbGridBackground from './components/ui/orb-grid-background.tsx'
 import { PageLoader } from './components/PageLoader.tsx'
+import { MagicCursor } from './components/MagicCursor.tsx'
 
 const WebDevelopment = lazy(() => import('./pages/WebDevelopment.jsx'))
 const Cybersecurity = lazy(() => import('./pages/Cybersecurity.jsx'))
@@ -88,6 +89,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <OrbGridBackground />
+      <MagicCursor />
       <Suspense fallback={<PageLoader />}>
         <AnimatedRoutes />
       </Suspense>

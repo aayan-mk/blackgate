@@ -9,7 +9,8 @@
     "server": "node server.js",
     "start": "node server.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "ssh root@179.66.148.171 'cd /var/www/blackgate-app && git pull origin main && npm install && npm run build && pm2 reload blackgate-api --update-env'"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

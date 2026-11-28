@@ -4,6 +4,12 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  insertPollResponse,
+  getAllPollResponses,
+  deletePollResponse,
+  generateCsv,
+} from './db.js';
 
 dotenv.config();
 
@@ -131,6 +137,165 @@ app.post('/api/contact', async (req, res) => {
       success: false,
       error: error.message || 'An internal error occurred while dispatching your email.',
     });
+  }
+});
+
+// Middleware to verify admin key for poll dashboard
+const verifyAdmin = (req, res, next) => {
+  const adminKey = process.env.ADMIN_KEY || 'blackgate-admin-2026';
+  const providedKey = req.headers['x-admin-key'] || req.query.adminKey;
+  if (!providedKey || providedKey !== adminKey) {
+    return res.status(401).json({ success: false, error: 'Unauthorized: Invalid Admin Key' });
+  }
+  next();
+};
+
+// Poll submission endpoint
+app.post('/api/poll/submit', async (req, res) => {
+  try {
+    const { name, phone, email, interest, message } = req.body;
+
+    if (!name || !phone || !email || !interest) {
+      return res.status(400).json({
+        success: false,
+        error: 'Name, phone number, email, and option (Development, VAPT, or Both) are required.',
+      });
+    }
+
+    const validInterests = ['Development', 'VAPT', 'Both'];
+    if (!validInterests.includes(interest)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Option must be one of: Development, VAPT, Both',
+      });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Please provide a valid email address.',
+      });
+    }
+
+    const { id } = await insertPollResponse({
+      name: name.trim(),
+      phone: phone.trim(),
+      email: email.trim(),
+      interest,
+      message: message ? message.trim() : '',
+    });
+
+    console.log(`[Poll Submission] New response from ${name} (${email}) for: ${interest}`);
+
+    // Optional email dispatch to info@blackgateitsolutions.co.in
+    try {
+      const transporter = createTransporter();
+      if (transporter) {
+        const recipient = process.env.CONTACT_RECEIVER_EMAIL || 'info@blackgateitsolutions.co.in';
+        await transporter.sendMail({
+          from: `"Blackgate Poll" <${process.env.SMTP_USER}>`,
+          replyTo: email,
+          to: recipient,
+          subject: `New Poll Submission: ${name} [${interest}]`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+              <h2 style="color: #06b6d4; margin-bottom: 16px;">New Service Poll / Interest Response</h2>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b; width: 140px;"><strong>Name:</strong></td>
+                  <td style="padding: 8px 0; color: #1e293b;">${name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;"><strong>Phone:</strong></td>
+                  <td style="padding: 8px 0; color: #1e293b;"><a href="tel:${phone}" style="color: #06b6d4;">${phone}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;"><strong>Email:</strong></td>
+                  <td style="padding: 8px 0; color: #1e293b;"><a href="mailto:${email}" style="color: #06b6d4;">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;"><strong>Interest Selected:</strong></td>
+                  <td style="padding: 8px 0; color: #0891b2; font-weight: bold; font-size: 16px;">${interest}</td>
+                </tr>
+              </table>
+              ${message ? `
+                <div style="padding: 14px; background-color: #f8fafc; border-radius: 6px; border-left: 4px solid #06b6d4;">
+                  <h4 style="margin: 0 0 6px 0; color: #0f172a;">Additional Note:</h4>
+                  <p style="margin: 0; color: #334155; white-space: pre-wrap;">${message}</p>
+                </div>
+              ` : ''}
+              <p style="font-size: 12px; color: #94a3b8; margin-top: 24px;">Blackgate Interactive Poll System • Entry #${id}</p>
+            </div>
+          `,
+        });
+      }
+    } catch (mailErr) {
+      console.warn('[Poll Mail Notification Warning]:', mailErr.message);
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Thank you! Your response has been submitted.',
+      id,
+    });
+  } catch (error) {
+    console.error('[Poll Submit Error]:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to record response. Please try again.',
+    });
+  }
+});
+
+// Admin verify key endpoint
+app.post('/api/poll/verify', (req, res) => {
+  const adminKey = process.env.ADMIN_KEY || 'blackgate-admin-2026';
+  const { key } = req.body || {};
+  if (key === adminKey) {
+    return res.json({ success: true, message: 'Authenticated' });
+  }
+  return res.status(401).json({ success: false, error: 'Invalid admin key' });
+});
+
+// Admin list poll responses endpoint
+app.get('/api/poll/responses', verifyAdmin, async (req, res) => {
+  try {
+    const rows = await getAllPollResponses();
+    return res.json({ success: true, count: rows.length, responses: rows });
+  } catch (error) {
+    console.error('[Poll Fetch Error]:', error);
+    return res.status(500).json({ success: false, error: 'Failed to fetch responses' });
+  }
+});
+
+// Admin export CSV endpoint
+app.get('/api/poll/export-csv', verifyAdmin, async (req, res) => {
+  try {
+    const rows = await getAllPollResponses();
+    const csvContent = generateCsv(rows);
+    const dateStr = new Date().toISOString().slice(0, 10);
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="blackgate-poll-responses-${dateStr}.csv"`
+    );
+    return res.send(csvContent);
+  } catch (error) {
+    console.error('[Poll Export Error]:', error);
+    return res.status(500).json({ success: false, error: 'Failed to export CSV' });
+  }
+});
+
+// Admin delete response endpoint
+app.delete('/api/poll/response/:id', verifyAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deletePollResponse(id);
+    return res.json({ success: true, message: 'Response deleted' });
+  } catch (error) {
+    console.error('[Poll Delete Error]:', error);
+    return res.status(500).json({ success: false, error: 'Failed to delete response' });
   }
 });
 

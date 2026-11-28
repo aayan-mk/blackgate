@@ -24,6 +24,8 @@ const Resources = lazy(() => import('./pages/Resources.tsx'))
 const Contact = lazy(() => import('./pages/Contact.tsx'))
 const Login = lazy(() => import('./pages/Login.tsx'))
 const SignUp = lazy(() => import('./pages/SignUp.tsx'))
+const PollSurvey = lazy(() => import('./pages/PollSurvey.tsx'))
+const PollAdmin = lazy(() => import('./pages/PollAdmin.tsx'))
 
 document.title = 'Blackgate'
 
@@ -80,6 +82,10 @@ function AnimatedRoutes() {
         <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
         <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
         <Route path="/signup" element={<PageWrapper><SignUp /></PageWrapper>} />
+        <Route path="/survey" element={<PageWrapper><PollSurvey /></PageWrapper>} />
+        <Route path="/poll" element={<PageWrapper><PollSurvey /></PageWrapper>} />
+        <Route path="/admin/poll" element={<PageWrapper><PollAdmin /></PageWrapper>} />
+        <Route path="/poll-admin" element={<PageWrapper><PollAdmin /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   )

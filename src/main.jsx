@@ -82,8 +82,11 @@ function AnimatedRoutes() {
         <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
         <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
         <Route path="/signup" element={<PageWrapper><SignUp /></PageWrapper>} />
+        <Route path="/internship" element={<PageWrapper><PollSurvey /></PageWrapper>} />
+        <Route path="/intern" element={<PageWrapper><PollSurvey /></PageWrapper>} />
         <Route path="/survey" element={<PageWrapper><PollSurvey /></PageWrapper>} />
         <Route path="/poll" element={<PageWrapper><PollSurvey /></PageWrapper>} />
+        <Route path="/admin/internship" element={<PageWrapper><PollAdmin /></PageWrapper>} />
         <Route path="/admin/poll" element={<PageWrapper><PollAdmin /></PageWrapper>} />
         <Route path="/poll-admin" element={<PageWrapper><PollAdmin /></PageWrapper>} />
       </Routes>

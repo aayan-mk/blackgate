@@ -16,6 +16,8 @@ import {
   KeyRound,
   AlertCircle,
   ExternalLink,
+  GraduationCap,
+  Globe,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,7 +29,9 @@ interface PollResponse {
   phone: string;
   email: string;
   interest: 'Development' | 'VAPT' | 'Both';
-  message: string | null;
+  college?: string | null;
+  portfolio?: string | null;
+  message?: string | null;
   created_at: string;
 }
 
@@ -42,7 +46,6 @@ export default function PollAdmin() {
   const [keyInput, setKeyInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  // Check existing session key on mount
   useEffect(() => {
     if (adminKey) {
       fetchResponses(adminKey);
@@ -95,13 +98,13 @@ export default function PollAdmin() {
           sessionStorage.removeItem('blackgate_admin_key');
           throw new Error('Session expired or invalid key.');
         }
-        throw new Error(data.error || 'Failed to fetch responses.');
+        throw new Error(data.error || 'Failed to fetch applicants.');
       }
 
       setIsAuthenticated(true);
       setResponses(data.responses || []);
     } catch (err: unknown) {
-      setErrorMsg(err instanceof Error ? err.message : 'Error fetching responses.');
+      setErrorMsg(err instanceof Error ? err.message : 'Error fetching applicants.');
     } finally {
       setLoading(false);
     }
@@ -114,7 +117,7 @@ export default function PollAdmin() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm(`Are you sure you want to delete response #${id}?`)) return;
+    if (!confirm(`Are you sure you want to delete applicant #${id}?`)) return;
 
     try {
       const res = await fetch(`/api/poll/response/${id}`, {
@@ -124,7 +127,7 @@ export default function PollAdmin() {
 
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
-        throw new Error(d.error || 'Failed to delete response.');
+        throw new Error(d.error || 'Failed to delete applicant.');
       }
 
       setResponses((prev) => prev.filter((r) => r.id !== id));
@@ -140,7 +143,7 @@ export default function PollAdmin() {
     setResponses([]);
   };
 
-  // Stats calculation
+  // Stats
   const total = responses.length;
   const devCount = responses.filter((r) => r.interest === 'Development').length;
   const vaptCount = responses.filter((r) => r.interest === 'VAPT').length;
@@ -153,14 +156,15 @@ export default function PollAdmin() {
       r.email.toLowerCase().includes(q) ||
       r.phone.toLowerCase().includes(q) ||
       r.interest.toLowerCase().includes(q) ||
+      (r.college && r.college.toLowerCase().includes(q)) ||
       (r.message && r.message.toLowerCase().includes(q))
     );
   });
 
   return (
     <div className="min-h-screen text-white bg-bg-primary py-10 px-4 sm:px-6 lg:px-8 selection:bg-accent-cyan/30">
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Top Navbar */}
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Top Navigation */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
             <Link
@@ -171,7 +175,7 @@ export default function PollAdmin() {
               <span>Back Home</span>
             </Link>
             <span className="text-sm font-mono text-accent-cyan font-bold tracking-wider uppercase">
-              Blackgate Poll Management Portal
+              Internship Applicant Portal
             </span>
           </div>
 
@@ -181,7 +185,7 @@ export default function PollAdmin() {
               target="_blank"
               className="inline-flex items-center gap-1.5 text-xs text-accent-cyan hover:underline"
             >
-              <span>View Public Poll</span>
+              <span>Candidate Application Form</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
 
@@ -208,9 +212,9 @@ export default function PollAdmin() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-white mb-2">Admin Authentication</h2>
+                <h2 className="text-2xl font-bold text-white mb-2">Internship Admin Access</h2>
                 <p className="text-xs text-text-secondary">
-                  Enter your Blackgate Admin Key to view submissions and download the response sheet.
+                  Enter your Blackgate Admin Key to view candidate submissions and download the Excel/CSV sheet.
                 </p>
               </div>
 
@@ -237,19 +241,19 @@ export default function PollAdmin() {
                   type="submit"
                   className="w-full bg-accent-cyan hover:bg-accent-teal text-bg-primary font-bold h-11 rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.4)]"
                 >
-                  Unlock Dashboard
+                  Unlock Candidate Portal
                 </Button>
               </form>
             </GlowCard>
           </div>
         ) : (
-          /* Authenticated Dashboard View */
+          /* Authenticated Dashboard */
           <div className="space-y-6">
             {/* Stat Cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
                 <div>
-                  <div className="text-xs text-text-secondary font-mono">Total Responses</div>
+                  <div className="text-xs text-text-secondary font-mono">Total Candidates</div>
                   <div className="text-3xl font-black text-white mt-1">{total}</div>
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-accent-cyan/15 flex items-center justify-center text-accent-cyan">
@@ -279,7 +283,7 @@ export default function PollAdmin() {
 
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
                 <div>
-                  <div className="text-xs text-text-secondary font-mono">3. Both</div>
+                  <div className="text-xs text-text-secondary font-mono">3. Both Tracks</div>
                   <div className="text-3xl font-black text-purple-400 mt-1">{bothCount}</div>
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-400">
@@ -295,7 +299,7 @@ export default function PollAdmin() {
                 <Input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search by name, phone, email, or option..."
+                  placeholder="Filter by candidate, college, track, phone, or email..."
                   className="pl-10 bg-bg-primary border-white/10 text-white h-10 text-xs rounded-xl"
                 />
               </div>
@@ -318,32 +322,36 @@ export default function PollAdmin() {
                   className="bg-accent-cyan hover:bg-accent-teal text-bg-primary font-bold h-10 px-4 text-xs rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.3)] flex items-center gap-2 cursor-pointer"
                 >
                   <FileSpreadsheet className="w-4 h-4" />
-                  <span>Download Excel/CSV Sheet</span>
+                  <span>Download Candidates Sheet (CSV)</span>
                   <Download className="w-3.5 h-3.5" />
                 </Button>
               </div>
             </div>
 
-            {/* Responses Data Table */}
+            {/* Candidates Table */}
             <div className="rounded-2xl border border-white/10 bg-bg-card/40 backdrop-blur-xl overflow-hidden shadow-2xl">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse text-xs">
                   <thead>
                     <tr className="border-b border-white/10 bg-white/5 text-text-secondary font-mono uppercase tracking-wider">
                       <th className="py-3.5 px-4 font-semibold w-12">#</th>
-                      <th className="py-3.5 px-4 font-semibold">Contact Info</th>
-                      <th className="py-3.5 px-4 font-semibold">Phone</th>
-                      <th className="py-3.5 px-4 font-semibold">Interest Option</th>
-                      <th className="py-3.5 px-4 font-semibold">Note / Scope</th>
-                      <th className="py-3.5 px-4 font-semibold">Date & Time</th>
+                      <th className="py-3.5 px-4 font-semibold">Candidate</th>
+                      <th className="py-3.5 px-4 font-semibold">Phone / WhatsApp</th>
+                      <th className="py-3.5 px-4 font-semibold">Track Choice</th>
+                      <th className="py-3.5 px-4 font-semibold">College / Org</th>
+                      <th className="py-3.5 px-4 font-semibold">Portfolio / Resume</th>
+                      <th className="py-3.5 px-4 font-semibold">Notes / Skills</th>
+                      <th className="py-3.5 px-4 font-semibold">Date</th>
                       <th className="py-3.5 px-4 font-semibold text-right">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
                     {filtered.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="text-center py-12 text-text-muted">
-                          {searchQuery ? 'No matching responses found.' : 'No responses collected yet.'}
+                        <td colSpan={9} className="text-center py-12 text-text-muted">
+                          {searchQuery
+                            ? 'No matching candidate found.'
+                            : 'No internship applications recorded yet.'}
                         </td>
                       </tr>
                     ) : (
@@ -382,16 +390,42 @@ export default function PollAdmin() {
                                 {item.interest}
                               </span>
                             </td>
+                            <td className="py-3.5 px-4 text-text-secondary">
+                              {item.college ? (
+                                <div className="flex items-center gap-1.5">
+                                  <GraduationCap className="w-3.5 h-3.5 text-accent-cyan shrink-0" />
+                                  <span className="truncate max-w-[140px]">{item.college}</span>
+                                </div>
+                              ) : (
+                                <span className="text-text-muted italic">—</span>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4">
+                              {item.portfolio ? (
+                                <a
+                                  href={item.portfolio.startsWith('http') ? item.portfolio : `https://${item.portfolio}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex items-center gap-1 text-accent-cyan hover:underline text-[11px]"
+                                >
+                                  <Globe className="w-3 h-3 shrink-0" />
+                                  <span className="truncate max-w-[120px]">View Link</span>
+                                  <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
+                              ) : (
+                                <span className="text-text-muted italic">—</span>
+                              )}
+                            </td>
                             <td className="py-3.5 px-4 max-w-xs truncate text-text-secondary">
-                              {item.message || <span className="text-text-muted italic">None</span>}
+                              {item.message || <span className="text-text-muted italic">—</span>}
                             </td>
                             <td className="py-3.5 px-4 font-mono text-text-muted text-[11px]">
-                              {new Date(item.created_at).toLocaleString()}
+                              {new Date(item.created_at).toLocaleDateString()}
                             </td>
                             <td className="py-3.5 px-4 text-right">
                               <button
                                 onClick={() => handleDelete(item.id)}
-                                title="Delete entry"
+                                title="Delete candidate"
                                 className="p-1.5 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-500/10 transition-colors"
                               >
                                 <Trash2 className="w-4 h-4" />
@@ -406,8 +440,8 @@ export default function PollAdmin() {
               </div>
 
               <div className="p-3 border-t border-white/10 bg-white/5 flex items-center justify-between text-[11px] text-text-muted font-mono">
-                <span>Total records: {filtered.length} of {total}</span>
-                <span>Database: data/poll.sqlite (Persistent)</span>
+                <span>Candidates shown: {filtered.length} of {total}</span>
+                <span>Database: data/poll.sqlite</span>
               </div>
             </div>
           </div>

@@ -89,14 +89,14 @@ function contactApiPlugin() {
 
               // Submit response
               if (pathname === '/submit' || pathname === '/submit/') {
-                const { name, phone, email, interest, message } = data;
+                const { name, phone, email, interest, college, portfolio, message } = data;
                 if (!name || !phone || !email || !interest) {
                   res.statusCode = 400;
                   res.setHeader('Content-Type', 'application/json');
                   return res.end(
                     JSON.stringify({
                       success: false,
-                      error: 'Name, phone, email, and option (Development, VAPT, Both) are required.',
+                      error: 'Name, phone, email, and internship track (Development, VAPT, Both) are required.',
                     })
                   );
                 }
@@ -106,6 +106,8 @@ function contactApiPlugin() {
                   phone: phone.trim(),
                   email: email.trim(),
                   interest,
+                  college: college ? college.trim() : '',
+                  portfolio: portfolio ? portfolio.trim() : '',
                   message: message ? message.trim() : '',
                 });
 
@@ -114,7 +116,7 @@ function contactApiPlugin() {
                 return res.end(
                   JSON.stringify({
                     success: true,
-                    message: 'Response recorded successfully.',
+                    message: 'Internship application recorded successfully.',
                     id: result.id,
                   })
                 );

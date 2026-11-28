@@ -150,15 +150,15 @@ const verifyAdmin = (req, res, next) => {
   next();
 };
 
-// Poll submission endpoint
+// Poll / Internship submission endpoint
 app.post('/api/poll/submit', async (req, res) => {
   try {
-    const { name, phone, email, interest, message } = req.body;
+    const { name, phone, email, interest, college, portfolio, message } = req.body;
 
     if (!name || !phone || !email || !interest) {
       return res.status(400).json({
         success: false,
-        error: 'Name, phone number, email, and option (Development, VAPT, or Both) are required.',
+        error: 'Name, phone number, email, and internship track (Development, VAPT, or Both) are required.',
       });
     }
 
@@ -166,7 +166,7 @@ app.post('/api/poll/submit', async (req, res) => {
     if (!validInterests.includes(interest)) {
       return res.status(400).json({
         success: false,
-        error: 'Option must be one of: Development, VAPT, Both',
+        error: 'Track must be one of: Development, VAPT, Both',
       });
     }
 
@@ -183,10 +183,12 @@ app.post('/api/poll/submit', async (req, res) => {
       phone: phone.trim(),
       email: email.trim(),
       interest,
+      college: college ? college.trim() : '',
+      portfolio: portfolio ? portfolio.trim() : '',
       message: message ? message.trim() : '',
     });
 
-    console.log(`[Poll Submission] New response from ${name} (${email}) for: ${interest}`);
+    console.log(`[Internship Poll] New candidate: ${name} (${email}) for: ${interest}`);
 
     // Optional email dispatch to info@blackgateitsolutions.co.in
     try {
@@ -194,16 +196,16 @@ app.post('/api/poll/submit', async (req, res) => {
       if (transporter) {
         const recipient = process.env.CONTACT_RECEIVER_EMAIL || 'info@blackgateitsolutions.co.in';
         await transporter.sendMail({
-          from: `"Blackgate Poll" <${process.env.SMTP_USER}>`,
+          from: `"Blackgate Internship" <${process.env.SMTP_USER}>`,
           replyTo: email,
           to: recipient,
-          subject: `New Poll Submission: ${name} [${interest}]`,
+          subject: `New Internship Application: ${name} [${interest} Track]`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-              <h2 style="color: #06b6d4; margin-bottom: 16px;">New Service Poll / Interest Response</h2>
+              <h2 style="color: #06b6d4; margin-bottom: 16px;">New Internship Application Received</h2>
               <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
                 <tr>
-                  <td style="padding: 8px 0; color: #64748b; width: 140px;"><strong>Name:</strong></td>
+                  <td style="padding: 8px 0; color: #64748b; width: 140px;"><strong>Candidate Name:</strong></td>
                   <td style="padding: 8px 0; color: #1e293b;">${name}</td>
                 </tr>
                 <tr>
@@ -215,17 +217,29 @@ app.post('/api/poll/submit', async (req, res) => {
                   <td style="padding: 8px 0; color: #1e293b;"><a href="mailto:${email}" style="color: #06b6d4;">${email}</a></td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #64748b;"><strong>Interest Selected:</strong></td>
+                  <td style="padding: 8px 0; color: #64748b;"><strong>Selected Track:</strong></td>
                   <td style="padding: 8px 0; color: #0891b2; font-weight: bold; font-size: 16px;">${interest}</td>
                 </tr>
+                ${college ? `
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;"><strong>College / Degree:</strong></td>
+                  <td style="padding: 8px 0; color: #1e293b;">${college}</td>
+                </tr>
+                ` : ''}
+                ${portfolio ? `
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;"><strong>GitHub / Resume:</strong></td>
+                  <td style="padding: 8px 0; color: #1e293b;"><a href="${portfolio}" target="_blank" style="color: #06b6d4;">${portfolio}</a></td>
+                </tr>
+                ` : ''}
               </table>
               ${message ? `
                 <div style="padding: 14px; background-color: #f8fafc; border-radius: 6px; border-left: 4px solid #06b6d4;">
-                  <h4 style="margin: 0 0 6px 0; color: #0f172a;">Additional Note:</h4>
+                  <h4 style="margin: 0 0 6px 0; color: #0f172a;">Notes / Experience:</h4>
                   <p style="margin: 0; color: #334155; white-space: pre-wrap;">${message}</p>
                 </div>
               ` : ''}
-              <p style="font-size: 12px; color: #94a3b8; margin-top: 24px;">Blackgate Interactive Poll System • Entry #${id}</p>
+              <p style="font-size: 12px; color: #94a3b8; margin-top: 24px;">Blackgate Internship Portal • Applicant ID #${id}</p>
             </div>
           `,
         });
@@ -236,14 +250,14 @@ app.post('/api/poll/submit', async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: 'Thank you! Your response has been submitted.',
+      message: 'Thank you! Your internship application has been submitted.',
       id,
     });
   } catch (error) {
     console.error('[Poll Submit Error]:', error);
     return res.status(500).json({
       success: false,
-      error: 'Failed to record response. Please try again.',
+      error: 'Failed to record application. Please try again.',
     });
   }
 });

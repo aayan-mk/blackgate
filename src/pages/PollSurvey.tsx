@@ -10,11 +10,13 @@ import {
   AlertCircle,
   Loader2,
   ArrowLeft,
-  Sparkles,
   Phone,
   Mail,
   User,
+  GraduationCap,
+  Globe,
   ShieldCheck,
+  Briefcase,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -36,22 +38,25 @@ const OPTIONS: OptionCard[] = [
   {
     id: 'Development',
     title: '1. Development',
-    badge: 'Engineering',
-    description: 'Custom Web Apps, Cloud Native Platforms, Microservices & High-Scale Systems.',
+    badge: 'Software Engineering Track',
+    description:
+      'Full Stack Web & App Engineering. Build high-scale microservices, modern frontend interfaces, reactive APIs & cloud-native systems.',
     icon: Code2,
   },
   {
     id: 'VAPT',
     title: '2. VAPT',
-    badge: 'Cybersecurity',
-    description: 'Vulnerability Assessment & Penetration Testing, Red Teaming, Code Audits & Zero-Day Scans.',
+    badge: 'Cybersecurity & Offensive Security Track',
+    description:
+      'Vulnerability Assessment & Penetration Testing. Real-world ethical hacking, API & web penetration audits, security scanners & threat defense.',
     icon: ShieldAlert,
   },
   {
     id: 'Both',
     title: '3. Both',
-    badge: 'Full-Spectrum',
-    description: 'End-to-end secure engineering: Built from ground up with baked-in zero-trust & rigorous pen-testing.',
+    badge: 'Full-Spectrum DevSecOps Track',
+    description:
+      'Dual specialization: Secure Software Architecture with active offensive security auditing. Learn to build rock-solid systems and break them.',
     icon: Layers,
   },
 ];
@@ -62,6 +67,8 @@ export default function PollSurvey() {
     phone: '',
     email: '',
     interest: 'Both' as PollOption,
+    college: '',
+    portfolio: '',
     message: '',
   });
 
@@ -115,21 +122,21 @@ export default function PollSurvey() {
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Failed to submit response. Please try again.');
+        throw new Error(data.error || 'Failed to submit application. Please try again.');
       }
 
       setStatus('success');
     } catch (err: unknown) {
       setStatus('error');
       setErrorMessage(
-        err instanceof Error ? err.message : 'Unable to submit poll. Please try again later.'
+        err instanceof Error ? err.message : 'Unable to submit application. Please try again later.'
       );
     }
   };
 
   return (
     <div className="relative min-h-screen text-white bg-bg-primary overflow-x-hidden selection:bg-accent-cyan/30 py-12 px-4 sm:px-6 lg:px-8">
-      {/* Background radial gradients */}
+      {/* Background ambient glow */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-accent-cyan/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-10 left-10 w-[400px] h-[300px] bg-accent-teal/5 rounded-full blur-[120px]" />
@@ -140,7 +147,7 @@ export default function PollSurvey() {
         <div className="flex items-center justify-between mb-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-white transition-colors py-2 px-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-accent-cyan/40 backdrop-blur-md"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm text-text-secondary hover:text-white transition-colors py-2 px-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-accent-cyan/40 backdrop-blur-md"
           >
             <ArrowLeft className="w-4 h-4 text-accent-cyan" />
             <span>Blackgate Home</span>
@@ -149,7 +156,7 @@ export default function PollSurvey() {
           <div className="flex items-center gap-2.5">
             <img src={logoImage} alt="Blackgate" className="h-6 w-auto" />
             <span className="text-xs uppercase tracking-widest text-accent-cyan font-mono font-bold">
-              Interest Inquiry
+              Internship 2026/2027
             </span>
           </div>
         </div>
@@ -166,18 +173,18 @@ export default function PollSurvey() {
 
             <div>
               <h2 className="text-3xl font-black tracking-tight text-white mb-3">
-                Preference Recorded
+                Application Received!
               </h2>
               <p className="text-base text-text-secondary max-w-md mx-auto leading-relaxed">
-                Thank you, <span className="text-white font-medium">{formData.name}</span>! Your
-                interest in <span className="text-accent-cyan font-semibold">{formData.interest}</span> has
-                been securely saved into our system.
+                Thank you, <span className="text-white font-medium">{formData.name}</span>! Your interest in the{' '}
+                <span className="text-accent-cyan font-semibold">{formData.interest} Internship Track</span> has been
+                registered. Our talent & technical team will review your profile and reach out via email/phone.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-white/5 border border-white/10 max-w-sm mx-auto text-left text-xs text-text-secondary space-y-2">
               <div className="flex justify-between">
-                <span>Selected Focus:</span>
+                <span>Selected Track:</span>
                 <span className="text-accent-cyan font-semibold">{formData.interest}</span>
               </div>
               <div className="flex justify-between">
@@ -185,9 +192,15 @@ export default function PollSurvey() {
                 <span className="text-white font-medium">{formData.email}</span>
               </div>
               <div className="flex justify-between">
-                <span>Contact Phone:</span>
+                <span>Phone:</span>
                 <span className="text-white font-medium">{formData.phone}</span>
               </div>
+              {formData.college && (
+                <div className="flex justify-between">
+                  <span>College/Org:</span>
+                  <span className="text-white font-medium truncate max-w-[180px]">{formData.college}</span>
+                </div>
+              )}
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
@@ -200,6 +213,8 @@ export default function PollSurvey() {
                     phone: '',
                     email: '',
                     interest: 'Both',
+                    college: '',
+                    portfolio: '',
                     message: '',
                   });
                 }}
@@ -209,7 +224,7 @@ export default function PollSurvey() {
               </Button>
               <Link to="/">
                 <Button className="bg-accent-cyan hover:bg-accent-teal text-bg-primary font-bold h-11 px-6 rounded-xl text-sm shadow-[0_0_20px_rgba(6,182,212,0.4)]">
-                  Return to Main Website
+                  Explore Blackgate Website
                 </Button>
               </Link>
             </div>
@@ -223,25 +238,25 @@ export default function PollSurvey() {
             {/* Title Section */}
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/25 text-accent-cyan text-xs font-semibold tracking-wide uppercase mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Service Preference Poll</span>
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>Blackgate Internship Track Poll</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">
-                What Can We Build or Secure for You?
+                Choose Your Internship Domain
               </h1>
               <p className="text-sm sm:text-base text-text-secondary max-w-lg mx-auto">
-                Select your area of interest below so our engineering & security specialists can reach
-                out with tailored specifications.
+                Are you looking to write high-performance software, master ethical hacking & VAPT, or master both?
+                Select your preferred track below to apply.
               </p>
             </div>
 
-            {/* Main Card */}
+            {/* Main Form Card */}
             <GlowCard className="p-6 sm:p-10 bg-bg-card/40 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl">
               <form onSubmit={handleSubmit} className="space-y-8">
-                {/* 1. Poll Option Radio Selector */}
+                {/* 1. Internship Track Radio Selector */}
                 <div className="space-y-3">
-                  <label className="text-sm font-semibold text-white uppercase tracking-wider block">
-                    Choose Your Primary Requirement <span className="text-accent-cyan">*</span>
+                  <label className="text-xs font-mono font-semibold text-accent-cyan uppercase tracking-wider block">
+                    Step 1: Select Your Internship Track <span className="text-accent-cyan">*</span>
                   </label>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
@@ -271,7 +286,7 @@ export default function PollSurvey() {
                                 <Icon className="w-4 h-4" />
                               </div>
 
-                              {/* Custom Radio Circle */}
+                              {/* Radio Indicator */}
                               <div
                                 className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
                                   isSelected
@@ -285,7 +300,7 @@ export default function PollSurvey() {
                               </div>
                             </div>
 
-                            <div className="text-xs font-mono font-semibold text-accent-cyan/80 mb-1">
+                            <div className="text-[11px] font-mono font-semibold text-accent-cyan/90 mb-1">
                               {opt.badge}
                             </div>
                             <h3 className="text-base font-bold text-white mb-1.5">{opt.title}</h3>
@@ -308,14 +323,14 @@ export default function PollSurvey() {
                   </div>
                 </div>
 
-                {/* 2. Contact Information Inputs */}
+                {/* 2. Applicant Details */}
                 <div className="space-y-4 pt-4 border-t border-white/10">
-                  <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-                    Contact Details
-                  </h3>
+                  <label className="text-xs font-mono font-semibold text-accent-cyan uppercase tracking-wider block">
+                    Step 2: Candidate Information
+                  </label>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Name */}
+                    {/* Full Name */}
                     <div className="space-y-1.5">
                       <label className="text-xs text-text-secondary font-medium">
                         Full Name <span className="text-accent-cyan">*</span>
@@ -326,7 +341,7 @@ export default function PollSurvey() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="Your Name"
+                          placeholder="Candidate Name"
                           required
                           disabled={status === 'loading'}
                           className="pl-10 bg-bg-primary/70 border-white/10 text-white placeholder:text-text-muted focus:border-accent-cyan focus:ring-accent-cyan/20 h-11 rounded-xl text-sm"
@@ -334,10 +349,10 @@ export default function PollSurvey() {
                       </div>
                     </div>
 
-                    {/* Phone Number */}
+                    {/* Phone Number / WhatsApp */}
                     <div className="space-y-1.5">
                       <label className="text-xs text-text-secondary font-medium">
-                        Phone Number <span className="text-accent-cyan">*</span>
+                        Phone / WhatsApp <span className="text-accent-cyan">*</span>
                       </label>
                       <div className="relative">
                         <Phone className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -355,36 +370,76 @@ export default function PollSurvey() {
                     </div>
                   </div>
 
-                  {/* Email */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Email Address */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs text-text-secondary font-medium">
+                        Email Address <span className="text-accent-cyan">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <Input
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="candidate@gmail.com"
+                          required
+                          disabled={status === 'loading'}
+                          className="pl-10 bg-bg-primary/70 border-white/10 text-white placeholder:text-text-muted focus:border-accent-cyan focus:ring-accent-cyan/20 h-11 rounded-xl text-sm"
+                        />
+                      </div>
+                    </div>
+
+                    {/* College / Institution */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs text-text-secondary font-medium">
+                        College / Degree / Branch <span className="text-text-muted">(Optional)</span>
+                      </label>
+                      <div className="relative">
+                        <GraduationCap className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <Input
+                          name="college"
+                          value={formData.college}
+                          onChange={handleChange}
+                          placeholder="e.g. B.Tech / BCA / MCA (3rd Year)"
+                          disabled={status === 'loading'}
+                          className="pl-10 bg-bg-primary/70 border-white/10 text-white placeholder:text-text-muted focus:border-accent-cyan focus:ring-accent-cyan/20 h-11 rounded-xl text-sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* GitHub / Portfolio / LinkedIn / Resume Link */}
                   <div className="space-y-1.5">
                     <label className="text-xs text-text-secondary font-medium">
-                      Email Address <span className="text-accent-cyan">*</span>
+                      GitHub / LinkedIn / Portfolio / Resume Link <span className="text-text-muted">(Optional)</span>
                     </label>
                     <div className="relative">
-                      <Mail className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <Globe className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <Input
-                        name="email"
-                        type="email"
-                        value={formData.email}
+                        name="portfolio"
+                        type="url"
+                        value={formData.portfolio}
                         onChange={handleChange}
-                        placeholder="you@company.com"
-                        required
+                        placeholder="https://github.com/username or Drive Resume link"
                         disabled={status === 'loading'}
                         className="pl-10 bg-bg-primary/70 border-white/10 text-white placeholder:text-text-muted focus:border-accent-cyan focus:ring-accent-cyan/20 h-11 rounded-xl text-sm"
                       />
                     </div>
                   </div>
 
-                  {/* Optional Project Note / Message */}
+                  {/* Skills / Projects / Experience */}
                   <div className="space-y-1.5">
                     <label className="text-xs text-text-secondary font-medium">
-                      Additional Details / Scope <span className="text-text-muted">(Optional)</span>
+                      Key Skills, Past Projects, or Reason for Applying{' '}
+                      <span className="text-text-muted">(Optional)</span>
                     </label>
                     <Textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Briefly describe what you're looking to build, audit, or timeline..."
+                      placeholder="e.g. Hands-on experience with React, Python, Linux, OWASP Top 10, TryHackMe, etc..."
                       disabled={status === 'loading'}
                       className="bg-bg-primary/70 border-white/10 text-white placeholder:text-text-muted focus:border-accent-cyan focus:ring-accent-cyan/20 rounded-xl text-sm min-h-[90px] p-3.5"
                     />
@@ -409,12 +464,12 @@ export default function PollSurvey() {
                     {status === 'loading' ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Recording Response...
+                        Submitting Application...
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Submit Choice
+                        Submit Internship Application
                       </>
                     )}
                   </Button>
@@ -422,7 +477,7 @@ export default function PollSurvey() {
 
                 <div className="flex items-center justify-center gap-2 pt-2 text-[11px] text-text-muted font-mono">
                   <ShieldCheck className="w-3.5 h-3.5 text-accent-cyan" />
-                  <span>Confidential • Never Shared • Zero-Trust Encrypted</span>
+                  <span>Direct to Blackgate HR & Technical Leads • Confidential</span>
                 </div>
               </form>
             </GlowCard>

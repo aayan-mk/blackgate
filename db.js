@@ -23,20 +23,34 @@ db.serialize(() => {
       phone TEXT NOT NULL,
       email TEXT NOT NULL,
       interest TEXT NOT NULL,
+      college TEXT,
+      portfolio TEXT,
       message TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  // Safely ensure new columns exist for existing databases
+  db.run(`ALTER TABLE poll_responses ADD COLUMN college TEXT`, () => {});
+  db.run(`ALTER TABLE poll_responses ADD COLUMN portfolio TEXT`, () => {});
 });
 
-export const insertPollResponse = ({ name, phone, email, interest, message = '' }) => {
+export const insertPollResponse = ({
+  name,
+  phone,
+  email,
+  interest,
+  college = '',
+  portfolio = '',
+  message = '',
+}) => {
   return new Promise((resolve, reject) => {
     const stmt = db.prepare(`
-      INSERT INTO poll_responses (name, phone, email, interest, message)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO poll_responses (name, phone, email, interest, college, portfolio, message)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
-    stmt.run([name, phone, email, interest, message], function (err) {
+    stmt.run([name, phone, email, interest, college, portfolio, message], function (err) {
       if (err) return reject(err);
       resolve({ id: this.lastID });
     });
@@ -67,8 +81,18 @@ export const deletePollResponse = (id) => {
 };
 
 export const generateCsv = (rows) => {
-  const headers = ['ID', 'Name', 'Phone', 'Email', 'Interest', 'Message', 'Submitted At (UTC)'];
-  
+  const headers = [
+    'ID',
+    'Name',
+    'Phone',
+    'Email',
+    'Internship Track',
+    'College / Education',
+    'Portfolio / GitHub / Resume',
+    'Notes / Experience',
+    'Application Date (UTC)',
+  ];
+
   const escapeCell = (str) => {
     if (str === null || str === undefined) return '""';
     const clean = String(str).replace(/"/g, '""');
@@ -84,7 +108,9 @@ export const generateCsv = (rows) => {
         escapeCell(r.phone),
         escapeCell(r.email),
         escapeCell(r.interest),
-        escapeCell(r.message),
+        escapeCell(r.college || ''),
+        escapeCell(r.portfolio || ''),
+        escapeCell(r.message || ''),
         escapeCell(r.created_at),
       ].join(',')
     ),
